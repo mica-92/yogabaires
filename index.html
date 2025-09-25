@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga en Baires</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+/* ===== VARIABLES Y ESTILOS GLOBALES ===== */
+:root {
+    --primary: #f5f2eaff;
+    --primary-green: #526650ff;
+    --primary-dark: #423d3dff;
+    --primary-red: #43181cff;
+    --accent: #8c5648ff;
+    --background: #f4f2e9ff;
+    --background-alt: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    background-color: #f5f2ea;
+}
+
+/* ===== NAV BAR STYLES ===== */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #43181cff;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    box-shadow: 8px 8px 0px #333, 8px 8px 0px 2px #000;
+    border-bottom: 2px solid #000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem;
+}
+
+.left-items {
+    display: flex;
+    align-items: center;
+}
+
+.slogan {
+    padding-top: 0.9rem;
+    margin-left: 1rem;
+    font-size: 18px;
+    color: #2c2900;
+}
+
+/* Menú de navegación principal */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+}
+
+.nav-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--primary);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background-color: #CD5C5C;
+}
+
+.nav-menu li:not(:last-child)::after {
+    content: '/';
+    color: #6c6464;
+    margin: 0 0.5rem;
+    font-weight: 400;
+}
+
+/* Logo y elementos de navegación */
+.logo-link {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-right: 1rem;
+}
+
+.right-logo {
+    height: 100%;
+    width: auto;
+    max-height: 30px;
+    object-fit: contain;
+}
+
+/* Iconos sociales */
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #CD5C5C;
+    transform: scale(1.1);
+}
+
+/* ===== MENÚ MÓVIL ===== */
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 1rem;
+    z-index: 1001;
+}
+
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.burger-line {
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #43181cff;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 8px 0px #333;
+}
+
+.mobile-menu.active {
+    height: 250px;
+}
+
+.mobile-menu-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-link {
+    color: var(--background);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.mobile-menu-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.mobile-menu-link:hover {
+    color: #CD5C5C;
+}
+
+.mobile-menu-link:hover::after {
+    width: 100%;
+}
+
+.mobile-menu-link.active {
+    color: #CD5C5C;
+}
+
+.mobile-menu-link.active::after {
+    width: 100%;
+    background-color: #CD5C5C;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-container {
+    margin-top: 70px;
+    height: calc(100vh - 78px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(#f5f2ea80, #d6c5b3ff);
+    background-color: rgba(214, 197, 179, 0.8);
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-bottom: 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.hero {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    color: var(--light);
+    background: url('path1009.png') no-repeat center top/cover;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero-logo {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    filter: drop-shadow(0 0 8px rgba(255, 250, 240, 0.4)) 
+            drop-shadow(0 0 15px rgba(255, 245, 230, 0.3))
+            drop-shadow(0 8px 20px rgba(140, 86, 72, 0.3));
+    transition: all 0.3s ease;
+    transform-origin: center bottom;
+}
+
+.hero-logo:hover {
+    filter: drop-shadow(0 0 12px rgba(255, 253, 250, 0.6)) 
+            drop-shadow(0 0 25px rgba(255, 250, 240, 0.4))
+            drop-shadow(0 0 35px rgba(255, 245, 230, 0.3))
+            drop-shadow(0 8px 25px rgba(140, 86, 72, 0.4));
+    transform: scale(1.03);
+}
+
+/* ===== MAPA Y FILTROS ===== */
+.yoga-main-section {
+    width: 100%;
+    min-height: calc(100vh - 78px);
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.yoga-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    transition: height 0.3s ease;
+}
+
+/* Título del mapa */
+.map-title-container {
+    height: 10vh;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-green);
+    padding: 0 10px;
+    border-bottom: 2px solid var(--primary-dark);
+    border-top: 2px solid var(--primary-dark);
+}
+
+.map-title-container img {
+    max-height: 60px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Contenedor del mapa */
+#map-container {
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    order: 1;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Panel de filtros */
+.filter-panel {
+    width: 100%;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    z-index: 10;
+    order: 2;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+/* ===== BOTONES TOGGLE ===== */
+.toggle-button {
+    background-color: var(--background);
+    color: var(--primary-dark);
+    border: 1px solid #333;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.toggle-button i:first-child {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-dark);
+}
+
+.toggle-button:hover {
+    background-color: #52665032;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(58, 112, 96, 0.2);
+}
+
+.toggle-button:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(58, 112, 96, 0.2);
+}
+
+.toggle-button.active {
+    background-color: #52665032;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(58, 112, 96, 0.2);
+}
+
+.toggle-button i.fas.fa-chevron-down {
+    position: static;
+    transform: none;
+    margin-left: auto;
+    padding-left: 0.5rem;
+}
+
+/* Botón específico para studios-toggle */
+button.toggle-button#studios-toggle  {
+    background: none;
+    font-size: 18px;
+    color: var(--primary-green);
+    font-weight: 900;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: var(--primary-green) solid 2px;
+    box-shadow: none;
+}
+
+button.toggle-button#studios-toggle:hover  {
+    background: #52665032;
+}
+
+
+/* Contenido toggle */
+.toggle-content {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 0;
+}
+
+.toggle-content.expanded {
+    max-height: 1000px;
+    overflow-y: visible;
+}
+
+/* ===== BOTÓN EXPANDIR ===== */
+.expand-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.expand-button:hover {
+    background-color: #b35050;
+    transform: scale(1.1);
+}
+
+.expand-button i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.yoga-section.expanded .expand-button i {
+    transform: rotate(180deg);
+}
+
+/* ===== BÚSQUEDA Y FILTROS ===== */
+.search-section {
+    margin-bottom: 1.5rem;
+    
+}
+
+.search-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--primary-dark);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background-color: var(--background);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-input:focus, .search-input:hover {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(58, 112, 96, 0.2);
+    background-color: #52665032;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-dark);
+}
+
+.filter-section {
+    margin-bottom: 1.5rem;
+}
+
+.filter-section h3 {
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-green);
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--primary-green);
+
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-option {
+    background-color: var(--background);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.filter-option:hover {
+    background-color: var(--primary-red) !important;
+    color: var(--background-alt);
+}
+
+.filter-option.active {
+    background-color: #43181c9b !important;
+    color: white;
+}
+
+/* ===== BOTONES APLICAR Y RESTABLECER FILTROS ===== */
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.filter-buttons button {
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+/* Botón Aplicar Filtros */
+.apply-btn {
+    background-color: var(--primary-green);
+    color: var(--primary);
+    border: 2px solid var(--primary-green) !important;
+}
+
+.apply-btn:hover {
+    background-color: var(--primary-red);
+    color: var(--primary);
+    border-color: var(--primary-red) !important;
+}
+
+.apply-btn:active {
+    background-color: color-mix(in srgb, var(--primary-green) 80%, transparent);
+    color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
+}
+
+/* Botón Restablecer Filtros */
+.reset-btn {
+    background-color: var(--primary-green);
+    color: var(--primary);
+    border: 2px solid var(--primary-green) !important;
+}
+
+.reset-btn:hover {
+    background-color: var(--primary-red);
+    color: var(--primary);
+    border-color: var(--primary-red) !important;
+}
+
+.reset-btn:active {
+    background-color: color-mix(in srgb, var(--primary-green) 80%, transparent);
+    color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
+}
+
+/* ===== OPCIONES DE FILTRO ===== */
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: "Share Tech Mono", monospace;
+}
+
+.filter-option {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    font-weight: bold; /* Texto en negrita */
+}
+
+.filter-option:hover {
+    background-color: var(--primary-dark);
+    color: var(--background-alt);
+}
+
+.filter-option.active {
+    background-color: var(--accent);
+    color: white;
+}
+/* ===== LISTA DE ESTUDIOS ===== */
+.studios-list-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.studios-list-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--primary-dark);
+}
+
+.studios-list-container {
+    overflow-y: auto;
+    margin-top: 1rem;
+    flex: 1;
+    min-height: 200px;
+}
+
+.studio-item {
+    cursor: pointer;
+    color: var(--primary-dark);
+    transition: all 0.2s ease;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--primary-green);
+    display: flex;
+    justify-content: space-between;
+}
+
+.studio-item:hover {
+    background-color: #f9f9f9;
+}
+
+.studio-item.highlighted {
+    background-color: #52665032;;
+    border-left: 4px solid var(--primary-green);
+}
+
+/* ===== DETALLE DE ESTUDIO ===== */
+.studio-detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    padding: 2rem;
+    overflow-y: auto;
+    display: none;
+}
+
+.studio-detail.active {
+    transform: translateX(0);
+    display: block;
+}
+
+.close-detail {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    z-index: 1001;
+}
+
+.studio-detail h2 {
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+}
+
+.detail-section {
+    margin-bottom: 1.5rem;
+}
+
+.detail-section h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: var(--background-alt);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* ===== POPUPS Y OVERLAYS ===== */
+.studio-popup {
+    padding: 0.5rem;
+    max-width: 250px;
+}
+
+.studio-popup h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.studio-popup p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.read-more-btn {
+    background-color: var(--primary-green);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    cursor: pointer;
+}
+
+.map-overlay.hidden {
+    display: none;
+}
+
+.overlay-message {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-message h3 {
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+}
+
+.overlay-message p {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.activate-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.activate-btn:hover {
+    background-color: #b35050;
+}
+
+/* ===== ESTILOS LEAFLET (MAPA) ===== */
+.leaflet-container {
+    background-color: var(--primary);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.leaflet-tile {
+    filter: hue-rotate(350deg) saturate(0.7) brightness(1.1) contrast(0.9);
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: var(--primary);
+    border: 2px solid var(--primary-dark);
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px var(--primary-dark);
+}
+
+.leaflet-popup-content {
+    color: var(--primary-dark);
+    margin: 15px;
+    font-size: 0.9rem;
+}
+
+.leaflet-popup-tip {
+    background-color: var(--primary);
+    border: 1px solid var(--primary-dark);
+}
+
+.leaflet-control-zoom a {
+    background-color: var(--primary);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark) !important;
+    border-radius: 0;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+.leaflet-control-attribution {
+    background-color: rgba(245, 242, 234, 0.9) !important;
+    color: var(--primary-dark);
+    border-top: 1px solid var(--primary-dark);
+    border-left: 1px solid var(--primary-dark);
+    font-size: 0.8rem;
+}
+
+.leaflet-control-attribution a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Marcadores personalizados */
+.custom-marker div {
+    background-color: var(--primary-green);
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+}
+
+.custom-marker.highlighted div {
+    background-color: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(140, 86, 72, 0.7);
+    transform: scale(1.2);
+}
+
+.custom-marker.highlighted {
+    z-index: 1000 !important;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Desktop Layout */
+@media (min-width: 1001px) {
+    .yoga-section {
+        flex-direction: row;
+        min-height: 70vh;
+        height: 80vh;
+    }
+    
+    .filter-panel {
+        width: 40%;
+        height: 100%;
+        padding: 2rem;
+        order: 1;
+    }
+    
+    #map-container {
+        width: 60%;
+        height: 100%;
+        order: 2;
+    }
+    
+    .studio-detail {
+        width: 40%;
+    }
+    
+    .filter-buttons button {
+        flex: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+    
+    .nav-menu {
+        display: flex;
+    }
+    
+    .social-icons .social-icon {
+        display: inline-block;
+    }
+    
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/* Tablet y Mobile */
+@media (max-width: 1200px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .social-icons .social-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .slogan {
+        display: none;
+    }
+    
+    .yoga-section {
+        min-height: 70vh;
+        height: 110vh;
+    }
+    
+    #map-container {
+        height: 30vh;
+    }
+    
+    .filter-panel {
+        padding: 1rem;
+        height: auto;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+    }
+    
+    .studio-detail {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .slogan {
+        display: none;
+    }
+    
+    .social-icon {
+        font-size: 20px;
+    }
+    
+    .logo-link {
+        height: 35px;
+    }
+    
+    .right-logo {
+        max-height: 35px;
+    }
+    
+    .hero-container {
+        height: calc(100vh - 70px);
+        min-height: 500px;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .hero-logo {
+        max-width: 90%;
+    }
+    
+    .map-title-container img {
+        max-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        min-height: 400px;
+    }
+    
+    .nav-content {
+        margin: 0 1rem;
+    }
+    
+    .hero-content {
+        padding: 0.5rem;
+    }
+    
+    .mobile-menu-content {
+        gap: 0.3rem;
+        padding: 1.5rem;
+    }
+    
+    .mobile-menu-link {
+        font-size: 0.9rem;
+    }
+    
+    .mobile-menu.active {
+        height: 100px;
+    }
+    
+    .map-title-container {
+        height: 8vh;
+        min-height: 60px;
+        padding: 0 5px;
+    }
+    
+    .map-title-container img {
+        max-height: 40px !important;
+        max-width: 90%;
+    }
+}
+
+/* Estados expandidos */
+.yoga-section.expanded {
+    height: 100vh !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+.yoga-section.expanded #map-container {
+    height: 60vh;
+}
+
+.yoga-section.expanded .filter-panel {
+    height: 40vh;
+}
+
+@media (min-width: 1001px) {
+    .yoga-section.expanded {
+        height: 100vh !important;
+    }
+    
+    .yoga-section.expanded #map-container {
+        height: 100%;
+    }
+    
+    .yoga-section.expanded .filter-panel {
+        height: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+    <!-- Nav Bar -->
+    <div class="nav-bar">
+        <div class="nav-content">
+            <div class="left-items">
+                <!-- Mobile burger menu (hidden on desktop) -->
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <div class="burger-icon">
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                    </div>
+                </div>
+                
+                <a href="/" class="logo-link">
+                    <img src="derecho-bordo.png" alt="Logo" class="right-logo">
+                </a>
+            </div>
+
+            <!-- Menú de navegación principal -->
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#mapa" class="nav-link">mapa de estudios</a></li>
+                    <li><a href="#sobre" class="nav-link">sobre yoga</a></li>
+                    <li><a href="#contacto" class="nav-link">contacto</a></li>
+                    <li><a href="#instagram" class="nav-link">instagram</a></li>
+                </ul>
+            </nav>
+
+            <div class="social-icons">
+                <a href="https://www.instagram.com/yogaenbaires" target="_blank" class="social-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="mailto:desenrollatumat@gmail.com" class="social-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://form.typeform.com/to/KsY2MoWM" class="social-icon">
+                    <i class="fa-solid fa-rss"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (FUERA de la nav-bar) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#mapa" class="mobile-menu-link">mapa de estudios</a>
+            <a href="#sobre" class="mobile-menu-link">sobre yoga</a>
+            <a href="#contacto" class="mobile-menu-link">contacto</a>
+            <a href="#instagram" class="mobile-menu-link">instagram</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-container">
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <img src="path1013.png" alt="Yoga En Baires" class="hero-logo">
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Map Section -->
+    <div class="yoga-main-section">
+        <div class="map-title-container" id="mapa">
+            <img src="mapa-titulo.png" alt="Encuentra tu estudio de yoga ideal en Buenos Aires">
+        </div>
+
+
+    
+        <div class="yoga-section" >
+
+            <button class="expand-button" id="expand-button">
+                <i class="fas fa-expand"></i>
+            </button>
+            
+            <!-- Map Container - First on mobile -->
+            <div id="map-container">
+
+            </div>
+
+            <!-- Filter Panel - Second on mobile -->
+            <div class="filter-panel">
+                <!-- Search Bar -->
+                <div class="search-section">
+
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Buscar Estudio..." class="search-input">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Filter toggle button -->
+                <button class="toggle-button" id="filter-toggle">
+                    <span><i class="fas fa-filter"></i> Filtros</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <div class="toggle-content" id="filter-content">
+                    <div class="filter-section">
+                        <h3>por barrio</h3>
+                        <div class="filter-options" id="barrio-filters">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <h3>por estilo de yoga</h3>
+                        <div class="filter-options" id="style-filters">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <h3>por niveles</h3>
+                        <div class="filter-options" id="level-filters">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <div class="filter-buttons">
+                            <button class="apply-btn" id="apply-filters">Aplicar Filtros</button>
+                            <button class="reset-btn" id="reset-filters">Restablecer Filtros</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Studios List Toggle -->
+                <button class="toggle-button active" id="studios-toggle">
+                    <span><i class="fas fa-list" style="color: var(--primary-green);"></i> Estudios Disponibles</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <!-- Studios List -->
+                <div class="toggle-content expanded" id="studios-content">
+                    <div class="studios-list-section">
+                        <div class="studios-list-container">
+                            <div id="studios-list">
+                                <!-- Los estudios se cargarán aquí dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Studio Detail Panel -->
+            <div class="studio-detail" id="studio-detail">
+                <div class="close-detail" id="close-detail">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div id="detail-content">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const burgerIcon = document.querySelector('.burger-icon');
+    
+    mobileMenuToggle.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        burgerIcon.classList.toggle('active');
+        
+        // Animate burger icon to X when menu is open
+        const burgerLines = document.querySelectorAll('.burger-line');
+        if (mobileMenu.classList.contains('active')) {
+            burgerLines[0].style.transform = 'rotate(45deg) translate(8px, 8px)';
+            burgerLines[1].style.opacity = '0';
+            burgerLines[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
+        } else {
+            burgerLines[0].style.transform = 'rotate(0) translate(0, 0)';
+            burgerLines[1].style.opacity = '1';
+            burgerLines[2].style.transform = 'rotate(0) translate(0, 0)';
+        }
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!mobileMenuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.remove('active');
+            
+            // Reset burger icon
+            const burgerLines = document.querySelectorAll('.burger-line');
+            burgerLines[0].style.transform = 'rotate(0) translate(0, 0)';
+            burgerLines[1].style.opacity = '1';
+            burgerLines[2].style.transform = 'rotate(0) translate(0, 0)';
+        }
+    });
+
+    // Scroll spy functionality
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('.yoga-main-section, .hero-container');
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
+        const navHeight = document.querySelector('.nav-bar').offsetHeight;
+        
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navHeight - 100;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id') || 'hero';
+            }
+        });
+        
+        // Update active state for all nav links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            
+            if (href === `#${currentSection}` || (currentSection === 'hero' && href === '/')) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Smooth scroll to sections
+    function setupSmoothScroll() {
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-menu-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '/') return; // Skip home link
+                
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const navHeight = document.querySelector('.nav-bar').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking
+                    mobileMenu.classList.remove('active');
+                    const burgerLines = document.querySelectorAll('.burger-line');
+                    burgerLines[0].style.transform = 'rotate(0) translate(0, 0)';
+                    burgerLines[1].style.opacity = '1';
+                    burgerLines[2].style.transform = 'rotate(0) translate(0, 0)';
+                }
+            });
+        });
+    }
+
+    // Initialize scroll spy and smooth scroll
+    window.addEventListener('scroll', updateActiveNavLink);
+    window.addEventListener('load', updateActiveNavLink);
+    setupSmoothScroll();
+});
+
+</script>
+
+<style>
+/* Improved active state styles */
+.nav-link.active {
+    color: var(--primary);
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #CD5C5C;
+    transition: width 0.3s ease;
+}
+
+.mobile-menu-link.active {
+    color: #CD5C5C;
+}
+
+.mobile-menu-link.active::after {
+    width: 100%;
+    background-color: #CD5C5C;
+}
+
+/* Ensure hero section is considered for active state */
+.hero-container {
+    position: relative;
+}
+
+/* Add ID to hero section for proper scrolling */
+#hero {
+    scroll-margin-top: 70px;
+}
+
+/* Improve scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better section spacing */
+.yoga-main-section {
+    scroll-margin-top: 70px;
+}
+</style>
+
+
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+            <script>
+                // MAP
+                const studiosData = [
+                    {
+                        "name": "Estudio Dharma",
+                        "logo": "lotus-negro",
+                        "lat": -34.6190,
+                        "lng": -58.4414,
+                        "styles": ["Hatha", "Vinyasa", "Yin"],
+                        "level": ["Beginner", "Intermediate"],
+                        "amenities": ["Mats", "Showers", "Changing Rooms"],
+                        "website": "#",
+                        "barrio": "caballito",
+                        "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga."
+                    },
+                    {
+                        "name": "Yoga Vida",
+                        "logo": "yoga-vida",
+                        "lat": -34.6030,
+                        "lng": -58.3914,
+                        "styles": ["Vinyasa", "Ashtanga"],
+                        "level": ["Intermediate", "Advanced"],
+                        "amenities": ["Mats", "Showers", "Cafe", "Retail"],
+                        "website": "#",
+                        "barrio": "recoleta",
+                        "description": "Yoga Vida offers dynamic classes for practitioners looking to deepen their practice in a supportive community environment."
+                    },
+                    {
+                        "name": "Peaceful Studio",
+                        "logo": "peaceful",
+                        "lat": -34.5750,
+                        "lng": -58.4314,
+                        "styles": ["Yin", "Restorative"],
+                        "level": ["Beginner"],
+                        "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
+                        "website": "#",
+                        "barrio": "palermo",
+                        "description": "A tranquil space focused on slow, mindful practices that help you connect with your inner self and find peace."
+                    },
+                    {
+                        "name": "Power Flow Yoga",
+                        "logo": "power-flow",
+                        "lat": -34.5950,
+                        "lng": -58.4014,
+                        "styles": ["Power Yoga", "Vinyasa"],
+                        "level": ["Intermediate", "Advanced"],
+                        "amenities": ["Mats", "Showers", "Lockers", "Retail"],
+                        "website": "#",
+                        "barrio": "belgrano",
+                        "description": "Challenge yourself with our powerful vinyasa flows designed to build strength and flexibility."
+                    },
+                    {
+                        "name": "Sunrise Yoga",
+                        "logo": "sunrise",
+                        "lat": -34.5890,
+                        "lng": -58.4114,
+                        "styles": ["Hatha", "Gentle Yoga"],
+                        "level": ["Beginner"],
+                        "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
+                        "website": "#",
+                        "barrio": "palermo",
+                        "description": "Start your day with our gentle morning classes that focus on alignment and mindful movement."
+                    }
+                ];
+
+                // Initialize map
+                const map = L.map('map-container').setView([-34.6030, -58.3814], 16);
+                    
+                // Add tile layer
+                L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png?api_key=054220fd-fb7c-4456-be82-bd45e593767d', {            attribution: 'Mica',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(map);
+                
+                // Store markers with reference to their studio
+                let markers = [];
+                let studioMarkersMap = new Map();
+
+                // Initialize UI elements
+                const studioDetail = document.getElementById('studio-detail');
+                const closeDetail = document.getElementById('close-detail');
+                const detailContent = document.getElementById('detail-content');
+                const applyFiltersBtn = document.getElementById('apply-filters');
+                const resetFiltersBtn = document.getElementById('reset-filters');
+                const filterToggle = document.getElementById('filter-toggle');
+                const filterContent = document.getElementById('filter-content');
+                const studiosToggle = document.getElementById('studios-toggle');
+                const studiosContent = document.getElementById('studios-content');
+
+                // Store current highlighted studio
+                let currentlyHighlightedStudio = null;
+
+                // Function to add studios to map
+                function addStudiosToMap(studios) {
+                    // Clear existing markers
+                    markers.forEach(marker => map.removeLayer(marker));
+                    markers = [];
+                    studioMarkersMap.clear();
+                    
+                    studios.forEach(studio => {
+                        // Create custom icon
+                        const customIcon = L.divIcon({
+                            className: 'custom-marker',
+                            html: `<div style="background-color: var(--primary-green); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"><i class="fas fa-spa"></i></div>`,
+                            iconSize: [30, 30],
+                            iconAnchor: [15, 15]
+                        });
+                        
+                        // Create marker
+                        const marker = L.marker([studio.lat, studio.lng], {icon: customIcon})
+                            .addTo(map)
+                            .bindPopup(`
+                                <div class="studio-popup">
+                                    <h3>${studio.name}</h3>
+                                    <p><strong>Estilos:</strong> ${studio.styles.join(', ')}</p>
+                                    <p><strong>Nivel:</strong> ${studio.level.join(', ')}</p>
+                                    <button class="read-more-btn" data-id="${studio.name}">Ver más</button>
+                                </div>
+                            `, {
+                                // Añade estas opciones para el popup
+                                offset: [0, -15], // Mueve el popup hacia arriba
+                                className: 'studio-popup-wrapper', // Clase adicional para estilos
+                                autoPan: true, // Ajusta automáticamente el mapa para que el popup sea visible
+                                autoPanPadding: [20, 20] // Padding alrededor del popup al hacer autoPan
+                            });
+
+                            
+                        
+                        // Store reference to studio in marker
+                        marker.studioData = studio;
+                        markers.push(marker);
+                        studioMarkersMap.set(studio.name, marker);
+                        
+                        // Add event listeners for hover effects
+                        marker.on('mouseover', function() {
+                            highlightStudio(studio.name, 'map');
+                        });
+                        
+                        marker.on('mouseout', function() {
+                            removeHighlight(studio.name, 'map');
+                        });
+                        
+                        // Add event listener to the read more button
+                        marker.on('popupopen', () => {
+                            document.querySelector(`.read-more-btn[data-id="${studio.name}"]`).addEventListener('click', () => {
+                                showStudioDetail(studio);
+                                map.closePopup();
+                            });
+                        });
+
+                        // Add click event to marker for inactivity reset
+                        marker.on('click', function() {
+                            resetInactivityTimer();
+                        });
+
+                        // Add popup events for inactivity reset
+                        marker.on('popupopen', function() {
+                            resetInactivityTimer();
+                            
+                            // Add event listener to the popup content
+                            setTimeout(function() {
+                                const popup = marker.getPopup();
+                                const popupElement = popup.getElement();
+                                if (popupElement) {
+                                    popupElement.addEventListener('click', resetInactivityTimer);
+                                    popupElement.addEventListener('mousemove', resetInactivityTimer);
+                                }
+                            }, 100);
+                        });
+
+                    });
+                }
+
+                // Function to toggle filter panel
+                function toggleFilterPanel() {
+                    // If filter panel is not expanded, expand it and collapse studios panel
+                    if (!filterContent.classList.contains('expanded')) {
+                        filterContent.classList.add('expanded');
+                        filterToggle.classList.add('active');
+                        studiosContent.classList.remove('expanded');
+                        studiosToggle.classList.remove('active');
+                    } else {
+                        // If filter panel is expanded, collapse it and expand studios panel
+                        filterContent.classList.remove('expanded');
+                        filterToggle.classList.remove('active');
+                        studiosContent.classList.add('expanded');
+                        studiosToggle.classList.add('active');
+                    }
+                }
+
+                // Function to toggle studios panel
+                function toggleStudiosPanel() {
+                    // If studios panel is not expanded, expand it and collapse filter panel
+                    if (!studiosContent.classList.contains('expanded')) {
+                        studiosContent.classList.add('expanded');
+                        studiosToggle.classList.add('active');
+                        filterContent.classList.remove('expanded');
+                        filterToggle.classList.remove('active');
+                    } else {
+                        // If studios panel is expanded, collapse it and expand filter panel
+                        studiosContent.classList.remove('expanded');
+                        studiosToggle.classList.remove('active');
+                        filterContent.classList.add('expanded');
+                        filterToggle.classList.add('active');
+                    }
+                }
+
+                // Function to highlight a studio
+                function highlightStudio(studioName, source) {
+                    if (currentlyHighlightedStudio === studioName) return;
+                    
+                    // Remove previous highlight if exists
+                    if (currentlyHighlightedStudio) {
+                        removeHighlight(currentlyHighlightedStudio, source);
+                    }
+                    
+                    // Find list item and marker
+                    const listItem = document.querySelector(`.studio-item[data-name="${studioName}"]`);
+                    const marker = studioMarkersMap.get(studioName);
+                    
+                    if (listItem) {
+                        listItem.classList.add('highlighted');
+                        
+                        // Scroll to make element visible if coming from map
+                        if (source === 'map') {
+                            listItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }
+                    
+                    if (marker) {
+                        // Add highlighted class to marker icon
+                        const icon = marker.getElement();
+                        if (icon) {
+                            icon.classList.add('highlighted');
+                        }
+                        
+                        // Open popup if coming from list and adjust view
+                        if (source === 'list-hover') {
+                            marker.openPopup();
+                            map.setView(marker.getLatLng(), 16, { animate: true, duration: 0.5 });
+                        }
+                    }
+                    
+                    currentlyHighlightedStudio = studioName;
+                }
+
+                // Function to remove highlight
+                function removeHighlight(studioName, source) {
+                    if (currentlyHighlightedStudio !== studioName) return;
+                    
+                    const listItem = document.querySelector(`.studio-item[data-name="${studioName}"]`);
+                    const marker = studioMarkersMap.get(studioName);
+                    
+                    if (listItem) {
+                        listItem.classList.remove('highlighted');
+                    }
+                    
+                    if (marker) {
+                        const icon = marker.getElement();
+                        if (icon) {
+                            icon.classList.remove('highlighted');
+                        }
+                        
+                        if (source === 'list') {
+                            marker.closePopup();
+                        }
+                    }
+                    
+                    currentlyHighlightedStudio = null;
+                }
+
+                // Function to show studio details
+                function showStudioDetail(studio) {
+                    detailContent.innerHTML = `
+                        <h2>${studio.name}</h2>
+                        <div class="detail-section">
+                            <h3>Barrio</h3>
+                            <p>${studio.barrio}</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Estilos</h3>
+                            <div class="tag-list">
+                                ${studio.styles.map(style => `<span class="tag">${style}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Nivel</h3>
+                            <div class="tag-list">
+                                ${studio.level.map(level => `<span class="tag">${level}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Servicios</h3>
+                            <div class="tag-list">
+                                ${studio.amenities.map(amenity => `<span class="tag">${amenity}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Descripción</h3>
+                            <p>${studio.description}</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Sitio Web</h3>
+                            <p><a href="${studio.website}" target="_blank">Visitar sitio web</a></p>
+                        </div>
+                    `;
+                    
+                    studioDetail.classList.add('active');
+                }
+
+                // Function to select a studio
+                function selectStudio(studioName) {
+                    const marker = studioMarkersMap.get(studioName);
+                    const studio = studiosData.find(s => s.name === studioName);
+                    
+                    if (marker && studio) {
+                        // Close any previously open popup
+                        map.closePopup();
+                        
+                        // Open marker popup
+                        marker.openPopup();
+                        
+                        // Center map on studio
+                        map.setView(marker.getLatLng(), 16, { animate: true, duration: 0.5 });
+                        
+                        // Show studio details
+                        showStudioDetail(studio);
+                        
+                        // Highlight studio
+                        highlightStudio(studioName, 'list');
+                    }
+                }
+
+                // Function to populate filter options
+                function populateFilters() {
+                    // Get all unique values for each filter category
+                    const barrios = [...new Set(studiosData.map(studio => studio.barrio))];
+                    const styles = [...new Set(studiosData.flatMap(studio => studio.styles))];
+                    const levels = [...new Set(studiosData.flatMap(studio => studio.level))];
+                    
+                    // Populate barrio filters
+                    const barrioFiltersContainer = document.getElementById('barrio-filters');
+                    barrioFiltersContainer.innerHTML = '';
+                    barrios.forEach(barrio => {
+                        const element = document.createElement('div');
+                        element.className = 'filter-option';
+                        element.textContent = barrio;
+                        element.dataset.value = barrio;
+                        element.dataset.category = 'barrio';
+                        element.addEventListener('click', toggleFilter);
+                        barrioFiltersContainer.appendChild(element);
+                    });
+                    
+                    // Populate style filters
+                    const styleFiltersContainer = document.getElementById('style-filters');
+                    styleFiltersContainer.innerHTML = '';
+                    styles.forEach(style => {
+                        const element = document.createElement('div');
+                        element.className = 'filter-option';
+                        element.textContent = style;
+                        element.dataset.value = style;
+                        element.dataset.category = 'styles';
+                        element.addEventListener('click', toggleFilter);
+                        styleFiltersContainer.appendChild(element);
+                    });
+                    
+                    // Populate level filters
+                    const levelFiltersContainer = document.getElementById('level-filters');
+                    levelFiltersContainer.innerHTML = '';
+                    levels.forEach(level => {
+                        const element = document.createElement('div');
+                        element.className = 'filter-option';
+                        element.textContent = level;
+                        element.dataset.value = level;
+                        element.dataset.category = 'level';
+                        element.addEventListener('click', toggleFilter);
+                        levelFiltersContainer.appendChild(element);
+                    });
+                }
+
+                // Function to toggle filter selection
+                function toggleFilter() {
+                    this.classList.toggle('active');
+                }
+
+                // Function to render studios list
+                function renderStudiosList(studios) {
+                    const studiosListContainer = document.getElementById('studios-list');
+                    
+                    if (studios.length === 0) {
+                        studiosListContainer.innerHTML = '<div class="no-studios">No se encontraron estudios con los filtros aplicados</div>';
+                        return;
+                    }
+                    
+                    let html = '';
+                    studios.forEach(studio => {
+                        html += `
+                            <div class="studio-item" data-name="${studio.name}">
+                                <span class="studio-name">${studio.name}</span>
+                                <span class="studio-neighborhood" style="color: var(--primary-green); font-style: italic;">${studio.barrio}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    studiosListContainer.innerHTML = html;
+                    
+                    // Add event listeners to studio items
+                    const studioItems = studiosListContainer.querySelectorAll('.studio-item');
+                    studioItems.forEach(item => {
+                        const studioName = item.getAttribute('data-name');
+                        
+                        // Hover events
+                        item.addEventListener('mouseenter', () => {
+                            highlightStudio(studioName, 'list-hover');
+                        });
+                        
+                        item.addEventListener('mouseleave', () => {
+                            removeHighlight(studioName, 'list-hover');
+                        });
+                        
+                        // Click event to select studio
+                        item.addEventListener('click', () => {
+                            selectStudio(studioName);
+                        });
+                        
+                        item.style.cursor = 'pointer';
+                    });
+                }
+
+                // Function to check if a studio matches the filters
+                function matchesFilters(studio, filters) {
+                    // Check barrio filter
+                    if (filters.barrio.length > 0 && !filters.barrio.includes(studio.barrio)) {
+                        return false;
+                    }
+                    
+                    // Check styles filter
+                    if (filters.styles.length > 0 && !filters.styles.some(style => studio.styles.includes(style))) {
+                        return false;
+                    }
+                    
+                    // Check level filter
+                    if (filters.level.length > 0 && !filters.level.some(level => studio.level.includes(level))) {
+                        return false;
+                    }
+                    
+                    return true;
+                }
+
+                // Function to apply filters
+                function applyFilters() {
+                    // Get all selected filters
+                    const selectedFilters = {
+                        barrio: [],
+                        styles: [],
+                        level: []
+                    };
+                    
+                    document.querySelectorAll('.filter-option.active').forEach(option => {
+                        const category = option.dataset.category;
+                        const value = option.dataset.value;
+                        selectedFilters[category].push(value);
+                    });
+                    
+                    // Filter studios
+                    const filteredStudios = studiosData.filter(studio => {
+                        return matchesFilters(studio, selectedFilters);
+                    });
+                    
+                    // Update map with filtered studios
+                    addStudiosToMap(filteredStudios);
+                    
+                    // Render filtered list
+                    renderStudiosList(filteredStudios);
+                    
+                    // Reset currently highlighted studio
+                    currentlyHighlightedStudio = null;
+                    
+                    // Close filter panel and open studios panel
+                    filterContent.classList.remove('expanded');
+                    filterToggle.classList.remove('active');
+                    studiosContent.classList.add('expanded');
+                    studiosToggle.classList.add('active');
+                }
+
+                // Function to reset filters
+                function resetFilters() {
+                    // Clear active classes
+                    document.querySelectorAll('.filter-option.active').forEach(option => {
+                        option.classList.remove('active');
+                    });
+                    
+                    // Show all studios
+                    addStudiosToMap(studiosData);
+                    
+                    // Render all studios
+                    renderStudiosList(studiosData);
+                    
+                    // Reset currently highlighted studio
+                    currentlyHighlightedStudio = null;
+                    
+                    // Close filter panel and open studios panel
+                    filterContent.classList.remove('expanded');
+                    filterToggle.classList.remove('active');
+                    studiosContent.classList.add('expanded');
+                    studiosToggle.classList.add('active');
+                }
+
+                // Event listeners
+                closeDetail.addEventListener('click', () => {
+                    studioDetail.classList.remove('active');
+                });
+
+                applyFiltersBtn.addEventListener('click', applyFilters);
+                resetFiltersBtn.addEventListener('click', resetFilters);
+                
+                // Toggle event listeners
+                filterToggle.addEventListener('click', toggleFilterPanel);
+                studiosToggle.addEventListener('click', toggleStudiosPanel);
+
+                // Map interaction variables
+                let mapInteractionTimer;
+                const MAP_TIMEOUT = 180000; // 3 minutes in milliseconds
+                let isMapInteractive = false;
+
+                // Initialize map interaction
+                function initializeMapInteraction() {
+                    const mapOverlay = document.getElementById('map-overlay');
+                    const activateBtn = document.getElementById('activate-map');
+                    
+                    // Start with map non-interactive
+                    disableMapInteraction();
+                    
+                    // Activate map when button is clicked
+                    activateBtn.addEventListener('click', function() {
+                        enableMapInteraction();
+                    });
+                    
+                    // Also activate when clicking anywhere on overlay
+                    mapOverlay.addEventListener('click', function(e) {
+                        if (e.target === mapOverlay) {
+                            enableMapInteraction();
+                        }
+                    });
+                    
+                    // Set up inactivity timer
+                    setupInactivityTimer();
+                }
+
+                // Enable map interaction
+                function enableMapInteraction() {
+                    const mapOverlay = document.getElementById('map-overlay');
+                    
+                    // Hide overlay
+                    mapOverlay.classList.add('hidden');
+                    
+                    // Enable map controls
+                    map.dragging.enable();
+                    map.touchZoom.enable();
+                    map.doubleClickZoom.enable();
+                    map.scrollWheelZoom.enable();
+                    map.boxZoom.enable();
+                    map.keyboard.enable();
+                    
+                    isMapInteractive = true;
+                    
+                    // Set up global event listeners for inactivity detection
+                    setupInactivityTimer();
+                    
+                    // Reset inactivity timer - START TIMER IMMEDIATELY
+                    resetInactivityTimer();
+                    console.log('Map enabled, inactivity timer started');
+                }
+
+                // Disable map interaction
+                function disableMapInteraction() {
+                    const mapOverlay = document.getElementById('map-overlay');
+                    
+                    // Ensure map is fully loaded before disabling
+                    if (!map._loaded) return;
+                    
+                    // Show overlay
+                    mapOverlay.classList.remove('hidden');
+                    
+                    // Disable map controls
+                    map.dragging.disable();
+                    map.touchZoom.disable();
+                    map.doubleClickZoom.disable();
+                    map.scrollWheelZoom.disable();
+                    map.boxZoom.disable();
+                    map.keyboard.disable();
+                    
+                    isMapInteractive = false;
+                }
+
+                // Set up inactivity timer
+                function setupInactivityTimer() {
+                    // Listen for all possible interactions
+                    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+                    
+                    events.forEach(event => {
+                        document.addEventListener(event, resetInactivityTimer, true);
+                    });
+                    
+                    // Leaflet-specific events
+                    map.on('click', resetInactivityTimer);
+                    map.on('mousemove', resetInactivityTimer);
+                    map.on('zoom', resetInactivityTimer);
+                    map.on('drag', resetInactivityTimer);
+                    map.on('popupopen', resetInactivityTimer);
+                }
+
+                // Reset inactivity timer
+                function resetInactivityTimer() {
+                    if (!isMapInteractive) return;
+                    
+                    // Clear existing timer
+                    if (mapInteractionTimer) {
+                        clearTimeout(mapInteractionTimer);
+                    }
+                    
+                    // Set new timer
+                    mapInteractionTimer = setTimeout(function() {
+                        if (isMapInteractive) {
+                            disableMapInteraction();
+                            console.log('Map disabled due to inactivity');
+                        }
+                    }, MAP_TIMEOUT);
+                }
+
+                // Initialize on page load
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Wait a brief moment for map to fully initialize
+                    setTimeout(function() {
+                        // Render all studios initially
+                        renderStudiosList(studiosData);
+                        
+                        // Populate filters
+                        populateFilters();
+                        
+                        // Add studios to map
+                        addStudiosToMap(studiosData);
+                        
+                        // Initialize map interaction functionality
+                        initializeMapInteraction();
+                        
+                        // On desktop, expand the studios panel by default
+                        if (window.innerWidth >= 1001) {
+                            studiosContent.classList.add('expanded');
+                            studiosToggle.classList.add('active');
+                        }
+                    }, 100);
+                });
+
+
+
+                        // Search functionality
+                const searchInput = document.getElementById('search-input');
+                
+                // Function to perform search
+                function performSearch(query) {
+                    if (!query.trim()) {
+                        // If search is empty, show all studios
+                        renderStudiosList(studiosData);
+                        addStudiosToMap(studiosData);
+                        return;
+                    }
+                    
+                    const searchTerm = query.toLowerCase().trim();
+                    
+                    // Filter studios based on search criteria
+                    const filteredStudios = studiosData.filter(studio => {
+                        return (
+                            studio.name.toLowerCase().includes(searchTerm) ||
+                            studio.barrio.toLowerCase().includes(searchTerm) ||
+                            studio.styles.some(style => style.toLowerCase().includes(searchTerm)) ||
+                            studio.level.some(level => level.toLowerCase().includes(searchTerm)) ||
+                            studio.description.toLowerCase().includes(searchTerm)
+                        );
+                    });
+                    
+                    // Update UI with search results
+                    renderStudiosList(filteredStudios);
+                    addStudiosToMap(filteredStudios);
+                    
+                    // Reset currently highlighted studio
+                    currentlyHighlightedStudio = null;
+                }
+
+                // Event listener for search input
+                searchInput.addEventListener('input', function() {
+                    performSearch(this.value);
+                });
+
+                // Event listener for Enter key
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch(this.value);
+                    }
+                });
+        // Expand functionality
+        const expandButton = document.getElementById('expand-button');
+        const yogaSection = document.querySelector('.yoga-section');
+
+        expandButton.addEventListener('click', function() {
+            yogaSection.classList.toggle('expanded');
+            
+            if (yogaSection.classList.contains('expanded')) {
+                expandButton.innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                expandButton.innerHTML = '<i class="fas fa-expand"></i>';
+            }
+            
+            // Redibujar el mapa cuando se cambia el tamaño
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 300);
+        });
+
+
+            </script>
+
+        </body>
+        </html>

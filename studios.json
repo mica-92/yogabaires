@@ -1,0 +1,64 @@
+{
+  "studios": [
+    {
+      "name": "Estudio Dharma",
+      "logo": "lotus-negro",
+      "lat": -34.6190,
+      "lng": -58.4414,
+      "styles": ["Hatha", "Vinyasa", "Yin"],
+      "level": ["Beginner", "Intermediate"],
+      "amenities": ["Mats", "Showers", "Changing Rooms"],
+      "website": "#",
+      "barrio": "caballito",
+      "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga."
+    },
+    {
+      "name": "Yoga Vida",
+      "logo": "yoga-vida",
+      "lat": -34.6030,
+      "lng": -58.3914,
+      "styles": ["Vinyasa", "Ashtanga"],
+      "level": ["Intermediate", "Advanced"],
+      "amenities": ["Mats", "Showers", "Cafe", "Retail"],
+      "website": "#",
+      "barrio": "recoleta",
+      "description": "Yoga Vida offers dynamic classes for practitioners looking to deepen their practice in a supportive community environment."
+    },
+    {
+      "name": "Peaceful Studio",
+      "logo": "peaceful",
+      "lat": -34.5750,
+      "lng": -58.4314,
+      "styles": ["Yin", "Restorative"],
+      "level": ["Beginner"],
+      "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
+      "website": "#",
+      "barrio": "palermo",
+      "description": "A tranquil space focused on slow, mindful practices that help you connect with your inner self and find peace."
+    },
+    {
+      "name": "Power Flow Yoga",
+      "logo": "power-flow",
+      "lat": -34.5950,
+      "lng": -58.4014,
+      "styles": ["Power Yoga", "Vinyasa"],
+      "level": ["Intermediate", "Advanced"],
+      "amenities": ["Mats", "Showers", "Lockers", "Retail"],
+      "website": "#",
+      "barrio": "belgrano",
+      "description": "Challenge yourself with our powerful vinyasa flows designed to build strength and flexibility."
+    },
+    {
+      "name": "Sunrise Yoga",
+      "logo": "sunrise",
+      "lat": -34.5890,
+      "lng": -58.4114,
+      "styles": ["Hatha", "Gentle Yoga"],
+      "level": ["Beginner"],
+      "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
+      "website": "#",
+      "barrio": "palermo",
+      "description": "Start your day with our gentle morning classes that focus on alignment and mindful movement."
+    }
+  ]
+}
