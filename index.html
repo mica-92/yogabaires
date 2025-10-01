@@ -494,11 +494,14 @@ footer:hover::after {
     color: white;
 }
 
+
+/* ===== FILTER BUTTONS LAYOUT ===== */
 .filter-buttons {
     display: flex;
     gap: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 1rem;
+    width: 100%;
 }
 
 .filter-buttons button {
@@ -511,6 +514,7 @@ footer:hover::after {
     font-size: 0.9rem;
     flex: 1;
     transition: all 0.3s ease;
+    width: 50%;
 }
 
 .apply-btn {
@@ -519,6 +523,11 @@ footer:hover::after {
     border: 2px solid var(--primary-green) !important;
 }
 
+.reset-btn {
+    background-color: var(--primary-green);
+    color: var(--primary);
+    border: 2px solid var(--primary-green) !important;
+}
 .apply-btn:hover {
     background-color: var(--primary-red);
     color: var(--primary);
@@ -531,11 +540,6 @@ footer:hover::after {
     border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
 }
 
-.reset-btn {
-    background-color: var(--primary-green);
-    color: var(--primary);
-    border: 2px solid var(--primary-green) !important;
-}
 
 .reset-btn:hover {
     background-color: var(--primary-red);
@@ -2138,38 +2142,7 @@ input[type="text"], input[type="search"], textarea {
 
 <script>
 
-// Variable global para almacenar los datos
-let studiosData = [];
-
-// Función para cargar datos desde el JSON
-async function loadStudiosData() {
-    try {
-        console.log('🔄 Cargando datos desde studios.json...');
-        
-        const response = await fetch('studios.json');
-        
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
-        
-        studiosData = await response.json();
-        console.log(`✅ ${studiosData.length} estudios cargados exitosamente`);
-        
-        return studiosData;
-        
-    } catch (error) {
-        console.error('❌ Error cargando studios.json:', error);
-        
-        // Datos de respaldo en caso de error
-        studiosData = getFallbackData();
-        console.log('🔄 Usando datos de respaldo...');
-        return studiosData;
-    }
-}
-
-// Datos de respaldo (solo unos pocos estudios básicos)
-function getFallbackData() {
-    return [
+ const studiosData = [
 
     {
         "name": "Estudio Dharma",
@@ -2678,27 +2651,7 @@ function getFallbackData() {
         ]
     }
 ]
-}
 
-// MAP SCRIPT - VERSIÓN CORREGIDA PARA MÓVILES
-let map; // Declarar map globalmente
-
-// Función para inicializar el mapa
-function initializeMap() {
-    console.log('Inicializando mapa...');
-    
-    // Esperar a que el DOM esté listo
-    const mapContainer = document.getElementById('map-container');
-    if (!mapContainer) {
-        console.error('Contenedor del mapa no encontrado');
-        return;
-    }
-    
-    // Forzar dimensiones visibles
-    mapContainer.style.display = 'block';
-    mapContainer.style.visibility = 'visible';
-    mapContainer.style.height = '100%';
-    mapContainer.style.width = '100%';
     
     // Crear el mapa
     map = L.map('map-container').setView([-34.6030, -58.3814], 13);
@@ -2710,14 +2663,6 @@ function initializeMap() {
         maxZoom: 20
     }).addTo(map);
     
-    // Redibujar el mapa después de un breve delay
-    setTimeout(function() {
-        map.invalidateSize(true);
-        console.log('Mapa redibujado después de inicialización');
-    }, 500);
-    
-    return map;
-}
 
 // Store markers with reference to their studio
 let markers = [];
