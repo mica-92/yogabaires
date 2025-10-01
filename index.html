@@ -1907,11 +1907,76 @@ footer:hover::after {
         height: 100vh !important;
     }
 }
+
+/* Remove text cursor from non-interactive elements */
+body, div, span, h1, h2, h3, h4, h5, h6, p, img, section, main, article, aside, header, footer {
+    cursor: default;
+}
+
+/* Keep pointer cursor for interactive elements */
+a, button, .filter-option, .studio-item, .read-more-btn, .instagram-btn, 
+.share-btn, .studio-action-btn, .mobile-nav-btn, .expand-button, 
+.filter-toggle-btn, .apply-btn, .reset-btn, .close-detail,
+.leaflet-container a, .leaflet-popup-close-button {
+    cursor: pointer;
+}
+
+/* Keep text cursor for actual text inputs */
+input[type="text"], input[type="search"], textarea {
+    cursor: text;
+}
+
+
+/* Flash Loading Screen */
+.flash-loading {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100dvh - 80px);
+    background-color:#c6d0db;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: flashFade 1.2s ease-in-out forwards;
+}
+
+.flash-loading-content {
+    color: var(--primary);
+    font-family: 'Calps', sans-serif;
+    font-size: 8rem;
+    text-align: center;
+    font-weight: 900;
+    animation: contentFade 1.2s ease-in-out forwards;
+}
+
+@keyframes flashFade {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 1; visibility: hidden; }
+}
+
+@keyframes contentFade {
+    0% { opacity: 0; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1); }
+    70% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
 </style>
 
 </head>
 
 <body>
+
+<!-- Flash Loading Screen -->
+<div class="flash-loading" id="flashLoading">
+    <div class="flash-loading-content">
+                <img src="path1013.png" alt="Yoga En Baires" class="hero-logo" id="hero-logo">
+                <img src="subtitulo.png" alt="Yoga En Baires Subtitle" class="hero-subtitle" id="hero-subtitle">
+    </div>
+</div>
+
 <!-- Nav Bar -->
 <div class="nav-bar">
     <div class="nav-content">
@@ -3749,6 +3814,19 @@ function resetInactivityTimer() {
 
 
 <script>
+
+// Flash loading screen
+document.addEventListener('DOMContentLoaded', function() {
+    const flashLoading = document.getElementById('flashLoading');
+    
+    // Remove flash loading after animation completes
+    setTimeout(() => {
+        if (flashLoading) {
+            flashLoading.remove();
+        }
+    }, 1000);
+});
+
 // NAV-BAR SCRIPT
 
     // Mobile menu toggle functionality
