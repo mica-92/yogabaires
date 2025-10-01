@@ -21,6 +21,15 @@
     font-display: swap;
 }
 
+
+.leaflet-container a.leaflet-popup-close-button {
+margin: 1rem;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+color: var(--accent);
+}
+
 :root {
     --primary: #f5f2eaff;
     --primary-green: #526650ff;
@@ -325,7 +334,7 @@ footer:hover::after {
 /* ===== MAPA Y FILTROS ===== */
 .yoga-main-section {
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100dvh - 85px) !important;
     display: flex;
     flex-direction: column;
     margin-top: 50px;
@@ -343,7 +352,7 @@ footer:hover::after {
 
 #map-container {
     width: 100%;
-    height: 100%;
+    height: 90dvh;
     z-index: 100;
     position: relative;
     flex-shrink: 0;
@@ -562,7 +571,6 @@ footer:hover::after {
     overflow-y: auto;
     margin-top: 1rem;
     flex: 1;
-    min-height: 200px;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-green) var(--background);
 }
@@ -776,18 +784,19 @@ footer:hover::after {
 .tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.4rem;
     margin-bottom: 2rem;
 }
 
 .tag {
     padding: 0.3rem 1rem;
     border-radius: 5px;
-    font-size: 1.3rem;
+    font-size: 1rem;
     display: inline-flex;
     align-items: center;
     height: fit-content;
     font-family: "Calps", sans-serif;
+    font-weight: 400;
     border: none;
     color: white;
     transition: all 0.3s ease;
@@ -968,14 +977,22 @@ footer:hover::after {
 }
 
 /* ===== POPUPS Y OVERLAYS ===== */
+.studio-popup-wrapper .leaflet-popup-content {
+    margin: 0;
+    width: 280px !important;
+}
+
 .studio-popup {
-    padding: 0.5rem;
-    max-width: 400px;
+    padding: 1rem;
 }
 
 .studio-popup h3 {
     color: var(--primary-green);
     font-family: 'Calps', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-green);    font-family: 'Calps', sans-serif;
     font-size: 1.5rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
@@ -1002,13 +1019,12 @@ footer:hover::after {
 .pop-tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.5rem;
     margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
 }
 
 .pop-tag {
-    padding: 0.3rem 0.6rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 5px;
     font-size: 0.8rem;
     display: inline-flex;
@@ -1017,40 +1033,17 @@ footer:hover::after {
     font-family: "Montserrat", sans-serif;
     border: none;
     color: white;
-    transition: all 0.3s ease;
-    font-weight: 400;
+    font-weight: 500;
 }
 
-.pop-tag.pop-style-tag {
+.pop-tag {
     background-color: white;
     border: 1px solid var(--primary-dark);
     color: var(--primary-green);
 }
 
-.pop-tag.pop-style-tag:hover {
-    background-color: #3d4d3a71;
-    color: var(--primary);
-}
-
-.pop-tag.pop-level-tag {
-    background-color: white;
-    border: 1px solid var(--primary-dark);
-    color: var(--primary-green);
-}
-
-.pop-tag.pop-level-tag:hover {
+.pop-tag:hover {
     background-color: #1a252f71;
-    color: var(--primary);
-}
-
-.pop-tag.pop-intensity-tag {
-    background-color: white;
-    border: 1px solid var(--primary-dark);
-    color: var(--primary-green);
-}
-
-.pop-tag.pop-intensity-tag:hover {
-    background-color: #3d4d3a71;
     color: var(--primary);
 }
 
@@ -1096,6 +1089,45 @@ footer:hover::after {
 
 .activate-btn:hover {
     background-color: #b35050;
+}
+
+.studio-popup .studio-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.studio-popup .read-more-btn {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.studio-popup .read-more-btn:hover {
+    background-color: var(--accent);
+}
+
+.studio-popup .instagram-btn {
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.studio-popup .instagram-btn:hover {
+    background-color: var(--accent);
 }
 
 /* ===== ESTILOS LEAFLET (MAPA) ===== */
@@ -1175,7 +1207,7 @@ footer:hover::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 50px;
     min-height: 50px;
     background-color: var(--primary-green);
     padding-right: 3rem;
@@ -1307,6 +1339,8 @@ footer:hover::after {
 .mobile-nav-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+
 
 /* ===== MEDIA QUERIES ===== */
 
@@ -1455,7 +1489,7 @@ footer:hover::after {
     
     .yoga-section.show-map #map-container {
         display: block !important;
-        height: 100vh !important;
+        height: 90dvh !important;
     }
     
     .yoga-section.show-map .filter-panel {
@@ -1481,13 +1515,12 @@ footer:hover::after {
     
     .map-header-container {
         flex-direction: column;
-        height: auto;
-        padding: 10px;
+        height: 50px;
+        padding: 0.2rem;
     }
     
     .map-title-container {
         justify-content: center;
-        margin-bottom: 10px;
         width: 100%;
         border-bottom: 0px solid var(--primary-dark);
         border-top:0px solid var(--primary-dark);
@@ -1510,7 +1543,7 @@ footer:hover::after {
     }
     
     #map-container {
-        height: 100%;
+        height: 90%;
     }
     
     .filter-panel {
@@ -1687,9 +1720,194 @@ footer:hover::after {
     display: none !important;
 }
 
+/* ===== SOLUCIÓN DEFINITIVA SCROLLBAR PANTALLAS INTERMEDIAS ===== */
+@media (max-width: 1000px) and (min-width: 769px) {
+
+    
+    /* Forzar scrollbar siempre visible */
+    .studios-list-container {
+        scrollbar-width: auto;
+        scrollbar-color: var(--primary-green) var(--background);
+    }
+    
+    .studios-list-container::-webkit-scrollbar {
+        width: 12px;
+        display: block !important;
+    }
+    
+    .studios-list-container::-webkit-scrollbar-track {
+        background: var(--background);
+        border-radius: 8px;
+        margin: 4px;
+        border: 1px solid var(--primary-green);
+    }
+    
+    .studios-list-container::-webkit-scrollbar-thumb {
+        background-color: var(--primary-green);
+        border-radius: 8px;
+        border: 3px solid var(--background);
+    }
+    
+    .studios-list-container::-webkit-scrollbar-thumb:hover {
+        background-color: var(--accent);
+    }
+    
+    /* Asegurar que haya suficiente contenido para scroll */
+    .studios-list-container::after {
+        content: '';
+        display: block;
+        height: 1px;
+        opacity: 0;
+    }
+}
+
+/* SCROLLBAR GLOBAL MEJORADA */
+.studios-list-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) var(--background);
+    overflow-y: auto;
+}
+
+.studios-list-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.studios-list-container::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: 8px;
+    margin: 4px;
+    border: 1px solid var(--primary-green);
+}
+
+.studios-list-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-green);
+    border-radius: 8px;
+    border: 3px solid var(--background);
+}
+
+.studios-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+}
+
+/* Estructura base mejorada */
+.filter-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.studios-list-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.studios-list-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.filter-container{
+    flex: 1;
+    overflow-y: auto;
+    min-height: 150px;
+}
+
+
+/* ESTILOS CRÍTICOS PARA REPARAR EL LAYOUT */
+#map-container {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+    background-color: var(--primary) !important;
+}
+
+.filter-panel {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Reset for mobile classes on desktop */
+@media (min-width: 1001px) {
+    .yoga-section {
+        flex-direction: row !important;
+    }
+    
+    #map-container {
+        width: 60% !important;
+        height: 100% !important;
+        display: block !important;
+    }
+    
+    .filter-panel {
+        width: 40% !important;
+        height: 100% !important;
+        display: flex !important;
+    }
+    
+    .studios-list-section {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .filter-section {
+        visibility: visible !important;
+    }
+    
+    /* Remove any mobile-specific hiding */
+    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) #map-container,
+    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) .filter-panel {
+        display: flex !important;
+        visibility: visible !important;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 1000px) {
+    .yoga-section {
+        flex-direction: column !important;
+    }
+    
+    #map-container {
+        width: 100% !important;
+        height: 50vh !important;
+    }
+    
+    .filter-panel {
+        width: 100% !important;
+        height: 50vh !important;
+    }
+    
+    .yoga-section.show-map #map-container {
+        display: block !important;
+        height: 90dvh !important;
+    }
+    
+    .yoga-section.show-map .filter-panel {
+        display: none !important;
+    }
+    
+    .yoga-section.show-studios #map-container {
+        display: none !important;
+    }
+    
+    .yoga-section.show-studios .filter-panel {
+        display: flex !important;
+        height: 100vh !important;
+    }
+    
+    .yoga-section.show-filters #map-container {
+        display: none !important;
+    }
+    
+    .yoga-section.show-filters .filter-panel {
+        display: flex !important;
+        height: 100vh !important;
+    }
+}
 </style>
-
-
 
 </head>
 
@@ -1770,39 +1988,38 @@ footer:hover::after {
             
             <!-- Map Container -->
             <div id="map-container">
-                <div class="map-overlay" id="map-overlay">
-                    <div class="overlay-message">
-                        <button class="activate-btn" id="activate-map">Cargando</button>
-                    </div>
-                </div>
+<div id="map-container"></div>
             </div>
 
             <!-- Filter Panel -->
             <div class="filter-panel">
                 <!-- Filter Section -->
-                <div class="filter-section">
-                    <h2 class="studios-list-title">Filtrar Estudios</h3>
-
-                    <h3>por barrio</h3>
-                    <div class="filter-options" id="barrio-filters">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                    
-                    <h3>por estilo de yoga</h3>
-                    <div class="filter-options" id="style-filters">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                    
-                    <h3>por niveles</h3>
-                    <div class="filter-options" id="level-filters">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                    
-                    <div class="filter-buttons">
-                        <button class="apply-btn" id="apply-filters">Aplicar Filtros</button>
-                        <button class="reset-btn" id="reset-filters">Restablecer Filtros</button>
-                    </div>
-                </div>
+    <div class="filter-section">
+        <h2 class="studios-list-title">Filtrar Estudios</h2>
+        
+        <div class="filter-content">
+            <h3>por barrio</h3>
+            <div class="filter-options" id="barrio-filters">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <h3>por estilo de yoga</h3>
+            <div class="filter-options" id="style-filters">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <h3>por niveles</h3>
+            <div class="filter-options" id="level-filters">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="apply-btn" id="apply-filters">Aplicar Filtros</button>
+            <button class="reset-btn" id="reset-filters">Restablecer Filtros</button>
+        </div>
+    </div>
+    
                 
                 <!-- Studios List -->
                 <div class="studios-list-section">
@@ -1856,8 +2073,39 @@ footer:hover::after {
 
 <script>
 
-// MAP SCRIPT - VERSIÓN CORREGIDA
-const studiosData = [
+// Variable global para almacenar los datos
+let studiosData = [];
+
+// Función para cargar datos desde el JSON
+async function loadStudiosData() {
+    try {
+        console.log('🔄 Cargando datos desde studios.json...');
+        
+        const response = await fetch('studios.json');
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        
+        studiosData = await response.json();
+        console.log(`✅ ${studiosData.length} estudios cargados exitosamente`);
+        
+        return studiosData;
+        
+    } catch (error) {
+        console.error('❌ Error cargando studios.json:', error);
+        
+        // Datos de respaldo en caso de error
+        studiosData = getFallbackData();
+        console.log('🔄 Usando datos de respaldo...');
+        return studiosData;
+    }
+}
+
+// Datos de respaldo (solo unos pocos estudios básicos)
+function getFallbackData() {
+    return [
+
     {
         "name": "Estudio Dharma",
         "logo": "lotus-negro",
@@ -2364,18 +2612,47 @@ const studiosData = [
             }
         ]
     }
-];
+]
+}
 
+// MAP SCRIPT - VERSIÓN CORREGIDA PARA MÓVILES
+let map; // Declarar map globalmente
 
-// Initialize map
-const map = L.map('map-container').setView([-34.6030, -58.3814], 16);
+// Función para inicializar el mapa
+function initializeMap() {
+    console.log('Inicializando mapa...');
     
-// Add tile layer
-L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png?api_key=054220fd-fb7c-4456-be82-bd45e593767d', {
-    attribution: 'Mica',
-    subdomains: 'abcd',
-    maxZoom: 20
-}).addTo(map);
+    // Esperar a que el DOM esté listo
+    const mapContainer = document.getElementById('map-container');
+    if (!mapContainer) {
+        console.error('Contenedor del mapa no encontrado');
+        return;
+    }
+    
+    // Forzar dimensiones visibles
+    mapContainer.style.display = 'block';
+    mapContainer.style.visibility = 'visible';
+    mapContainer.style.height = '100%';
+    mapContainer.style.width = '100%';
+    
+    // Crear el mapa
+    map = L.map('map-container').setView([-34.6030, -58.3814], 13);
+    
+    // Add tile layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?', {
+        attribution: 'Mica',
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(map);
+    
+    // Redibujar el mapa después de un breve delay
+    setTimeout(function() {
+        map.invalidateSize(true);
+        console.log('Mapa redibujado después de inicialización');
+    }, 500);
+    
+    return map;
+}
 
 // Store markers with reference to their studio
 let markers = [];
@@ -2393,6 +2670,11 @@ let currentlyHighlightedStudio = null;
 
 // Function to add studios to map
 function addStudiosToMap(studios) {
+    if (!map) {
+        console.error('Mapa no inicializado');
+        return;
+    }
+    
     // Clear existing markers
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
@@ -2413,12 +2695,12 @@ function addStudiosToMap(studios) {
             .bindPopup(`
                 <div class="studio-popup">
                     <h3>${studio.name}</h3>
-                        <div class="tag-pop">
-                            <div class="pop-tag-list">
-                            ${studio.styles.map(style => `<span class="pop-tag pop-style-tag">${style}</span>`).join('')}
-                            ${studio.level.map(level => `<span class="pop-tag pop-level-tag">${level}</span>`).join('')}
-                            ${studio.intensity ? `<span class="pop-tag pop-intensity-tag">${studio.intensity}</span>` : ''}
-                        </div></div>
+                    <div class="tag-pop">
+                        <div class="pop-tag-list">
+                        ${studio.styles.map(style => `<span class="pop-tag pop-style-tag">${style}</span>`).join('')}
+                        ${studio.level.map(level => `<span class="pop-tag pop-level-tag">${level}</span>`).join('')}
+                        ${studio.intensity ? `<span class="pop-tag pop-intensity-tag">${studio.intensity}</span>` : ''}
+                    </div></div>
                     <div class="studio-actions">
                     ${studio.instagram ? `<a href="https://instagram.com/${studio.instagram.replace('@', '')}" target="_blank" class="studio-action-btn instagram-btn">
                         <i class="fab fa-instagram" style="color: var(--primary)"></i>
@@ -2449,13 +2731,16 @@ function addStudiosToMap(studios) {
             removeHighlight(studio.name, 'map');
         });
         
-// Add event listener to the read more button
-marker.on('popupopen', () => {
-    document.querySelector(`.read-more-btn[data-studio="${studio.name}"]`).addEventListener('click', () => {
-        showStudioDetail(studio);
-        map.closePopup();
-    });
-});
+        // Add event listener to the read more button
+        marker.on('popupopen', () => {
+            const readMoreBtn = document.querySelector(`.read-more-btn[data-studio="${studio.name}"]`);
+            if (readMoreBtn) {
+                readMoreBtn.addEventListener('click', () => {
+                    showStudioDetail(studio);
+                    map.closePopup();
+                });
+            }
+        });
 
         // Add click event to marker for inactivity reset
         marker.on('click', function() {
@@ -2477,38 +2762,41 @@ marker.on('popupopen', () => {
             }, 100);
         });
     });
+    
+    console.log(`${studios.length} estudios agregados al mapa`);
 }
 
 // Function to highlight a studio
 function highlightStudio(studioName, source) {
+    // Si ya está destacado, no hacer nada
     if (currentlyHighlightedStudio === studioName) return;
     
-    // Remove previous highlight if exists
+    // Remover highlight anterior SI EXISTE
     if (currentlyHighlightedStudio) {
         removeHighlight(currentlyHighlightedStudio, source);
     }
     
-    // Find list item and marker
+    // Aplicar nuevo highlight
     const listItem = document.querySelector(`.studio-item[data-name="${studioName}"]`);
     const marker = studioMarkersMap.get(studioName);
     
     if (listItem) {
         listItem.classList.add('highlighted');
         
-        // Scroll to make element visible if coming from map
+        // Scroll para hacer visible si viene del mapa
         if (source === 'map') {
             listItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
     
     if (marker) {
-        // Add highlighted class to marker icon
+        // Agregar clase highlighted al ícono del marcador
         const icon = marker.getElement();
         if (icon) {
             icon.classList.add('highlighted');
         }
         
-        // Open popup if coming from list and adjust view
+        // Abrir popup si viene de la lista y ajustar vista
         if (source === 'list-hover') {
             marker.openPopup();
             map.setView(marker.getLatLng(), 16, { animate: true, duration: 0.5 });
@@ -2518,9 +2806,10 @@ function highlightStudio(studioName, source) {
     currentlyHighlightedStudio = studioName;
 }
 
-// Function to remove highlight
+// Function to remove highlight - CORREGIDA
 function removeHighlight(studioName, source) {
-    if (currentlyHighlightedStudio !== studioName) return;
+    // NO verificar si es el currentlyHighlightedStudio
+    // Solo remover si existe el elemento
     
     const listItem = document.querySelector(`.studio-item[data-name="${studioName}"]`);
     const marker = studioMarkersMap.get(studioName);
@@ -2535,14 +2824,17 @@ function removeHighlight(studioName, source) {
             icon.classList.remove('highlighted');
         }
         
+        // Cerrar popup solo si viene de la lista
         if (source === 'list') {
             marker.closePopup();
         }
     }
     
-    currentlyHighlightedStudio = null;
+    // Resetear solo si es el estudio actualmente destacado
+    if (currentlyHighlightedStudio === studioName) {
+        currentlyHighlightedStudio = null;
+    }
 }
-
 
 function showStudioDetail(studio) {
     const scheduleHTML = generateScheduleHTML(studio.schedule || getDefaultSchedule());
@@ -2576,6 +2868,8 @@ function showStudioDetail(studio) {
         </div>
 
         <!-- Información de Contacto -->
+            <h3>Sobre el Estudio</h3>
+
         <div class="detail-section">
             <h3>
                 ${studio.instagram ? `
@@ -2614,6 +2908,8 @@ function showStudioDetail(studio) {
 
         <!-- Descripción -->
         <div class="detail-section">
+                        <h3>Descripción del Estudio</h3>
+
             <p class="description-text">${studio.description}</p>
         </div>
 
@@ -2780,7 +3076,7 @@ function renderStudiosList(studios) {
         html += `
             <div class="studio-item" data-name="${studio.name}">
                 <div class="studio-info">
-                    <span class="studio-neighborhood" style="color: var(--primary-green); font-style: italic;">${studio.barrio}</span>
+                    <span class="studio-neighborhood" style="color: var(--primary-green); font-style: italic;">${studio.barrio} - </span>
                     <span class="studio-name">${studio.name}</span>
                 </div>
                 <div class="studio-actions">
@@ -2880,6 +3176,9 @@ function applyFilters() {
     
     // Reset currently highlighted studio
     currentlyHighlightedStudio = null;
+    
+    // Fix scrollbar después de filtrar
+    setTimeout(fixScrollbarIssue, 500);
 }
 
 // Function to reset filters
@@ -2909,59 +3208,112 @@ function initializeMobileNavigation() {
     
     console.log('Inicializando navegación móvil...');
     
-    // Estado inicial - mostrar mapa
-    yogaSection.classList.add('show-map');
-    
-    // Event listeners para los botones de navegación
-    mobileNavMap.addEventListener('click', function() {
-        console.log('Botón Mapa clickeado');
-        yogaSection.classList.remove('show-studios', 'show-filters');
+    // SOLO aplicar lógica móvil si estamos en móvil
+    if (window.innerWidth <= 1000) {
+        // Estado inicial - mostrar mapa (ocultar lista de estudios)
         yogaSection.classList.add('show-map');
+        yogaSection.classList.remove('show-studios', 'show-filters');
         
-        // Mostrar botón expandir solo en vista de mapa
-        expandButton.style.display = 'flex';
+        // Ocultar lista de estudios inicialmente
+        const initialStudiosListSection = document.querySelector('.studios-list-section');
+        if (initialStudiosListSection) {
+            initialStudiosListSection.style.display = 'none';
+        }
         
-        // Actualizar estado activo de los botones
-        updateMobileNavActiveState('map');
-    });
-    
-    mobileNavStudios.addEventListener('click', function() {
-        console.log('Botón Estudios clickeado');
-        yogaSection.classList.remove('show-map', 'show-filters');
-        yogaSection.classList.add('show-studios');
+        // Event listeners para los botones de navegación - SOLO EN MÓVIL
+        mobileNavMap.addEventListener('click', function() {
+            console.log('Botón Mapa clickeado - MÓVIL');
+            yogaSection.classList.remove('show-studios', 'show-filters');
+            yogaSection.classList.add('show-map');
+            
+            // Ocultar lista de estudios y mostrar solo mapa
+            const filterSection = document.querySelector('.filter-section');
+            const studiosList = document.querySelector('.studios-list-section');
+            
+            if (filterSection) filterSection.style.display = 'none';
+            if (studiosList) studiosList.style.display = 'none';
+            
+            // Mostrar botón expandir solo en vista de mapa
+            expandButton.style.display = 'flex';
+            
+            // Actualizar estado activo de los botones
+            updateMobileNavActiveState('map');
+            
+            // Redibujar mapa después de cambiar vistas
+            setTimeout(function() {
+                if (map) {
+                    map.invalidateSize(true);
+                    console.log('Mapa redibujado al cambiar a vista de mapa');
+                }
+            }, 300);
+        });
         
-        // Ocultar botón expandir en vista de estudios
-        expandButton.style.display = 'none';
+        mobileNavStudios.addEventListener('click', function() {
+            console.log('Botón Estudios clickeado - MÓVIL');
+            yogaSection.classList.remove('show-map', 'show-filters');
+            yogaSection.classList.add('show-studios');
+            
+            // Ocultar botón expandir en vista de estudios
+            expandButton.style.display = 'none';
+            
+            // Mostrar SOLO la lista de estudios, ocultar filtros y mapa
+            const filterSection = document.querySelector('.filter-section');
+            const studiosList = document.querySelector('.studios-list-section');
+            
+            if (filterSection) filterSection.style.display = 'none';
+            if (studiosList) studiosList.style.display = 'flex';
+            
+            // Asegurar que el contenedor de lista tenga altura adecuada
+            if (studiosList) {
+                studiosList.style.height = '100%';
+                studiosList.style.overflow = 'hidden';
+                studiosList.style.display = 'flex';
+                studiosList.style.flexDirection = 'column';
+            }
+            
+            // Actualizar estado activo de los botones
+            updateMobileNavActiveState('studios');
+            
+            // Forzar redibujo del scrollbar
+            setTimeout(fixScrollbarIssue, 100);
+        });
         
-        // Mostrar solo la lista de estudios, ocultar filtros
+        mobileNavFilters.addEventListener('click', function() {
+            console.log('Botón Filtros clickeado - MÓVIL');
+            yogaSection.classList.remove('show-map', 'show-studios');
+            yogaSection.classList.add('show-filters');
+            
+            // Ocultar botón expandir en vista de filtros
+            expandButton.style.display = 'none';
+            
+            // Mostrar solo los filtros, ocultar lista de estudios y mapa
+            const filterSection = document.querySelector('.filter-section');
+            const studiosList = document.querySelector('.studios-list-section');
+            
+            if (filterSection) filterSection.style.display = 'block';
+            if (studiosList) studiosList.style.display = 'none';
+            
+            // Actualizar estado activo de los botones
+            updateMobileNavActiveState('filters');
+        });
+        
+        // Configuración inicial específica para móviles
         const filterSection = document.querySelector('.filter-section');
-        const studiosListSection = document.querySelector('.studios-list-section');
+        const finalStudiosListSection = document.querySelector('.studios-list-section');
         
         if (filterSection) filterSection.style.display = 'none';
-        if (studiosListSection) studiosListSection.style.display = 'flex';
+        if (finalStudiosListSection) finalStudiosListSection.style.display = 'none';
         
-        // Actualizar estado activo de los botones
-        updateMobileNavActiveState('studios');
-    });
-    
-    mobileNavFilters.addEventListener('click', function() {
-        console.log('Botón Filtros clickeado');
-        yogaSection.classList.remove('show-map', 'show-studios');
-        yogaSection.classList.add('show-filters');
+        expandButton.style.display = 'flex';
         
-        // Ocultar botón expandir en vista de filtros
-        expandButton.style.display = 'none';
-        
-        // Mostrar solo los filtros, ocultar lista de estudios
-        const filterSection = document.querySelector('.filter-section');
-        const studiosListSection = document.querySelector('.studios-list-section');
-        
-        if (filterSection) filterSection.style.display = 'block';
-        if (studiosListSection) studiosListSection.style.display = 'none';
-        
-        // Actualizar estado activo de los botones
-        updateMobileNavActiveState('filters');
-    });
+        // Redibujar mapa después de que todo esté cargado
+        setTimeout(function() {
+            if (map) {
+                map.invalidateSize(true);
+                console.log('Mapa redibujado en carga inicial móvil');
+            }
+        }, 1000);
+    }
     
     // Función para actualizar el estado activo de los botones
     function updateMobileNavActiveState(activeButton) {
@@ -2985,6 +3337,7 @@ function initializeMobileNavigation() {
         }
     }
 }
+    
 
 // Funcionalidad para el botón de filtros en el header
 function initializeHeaderFilterButton() {
@@ -3034,114 +3387,6 @@ function initializeHeaderFilterButton() {
     });
 }
 
-// Map interaction variables
-let mapInteractionTimer;
-const MAP_TIMEOUT = 180000; // 3 minutes in milliseconds
-let isMapInteractive = false;
-
-// Initialize map interaction
-function initializeMapInteraction() {
-    const mapOverlay = document.getElementById('map-overlay');
-    const activateBtn = document.getElementById('activate-map');
-    
-    // Start with map non-interactive
-    disableMapInteraction();
-    
-    // Activate map when button is clicked
-    activateBtn.addEventListener('click', function() {
-        enableMapInteraction();
-    });
-    
-    // Also activate when clicking anywhere on overlay
-    mapOverlay.addEventListener('click', function(e) {
-        if (e.target === mapOverlay) {
-            enableMapInteraction();
-        }
-    });
-    
-    // Set up inactivity timer
-    setupInactivityTimer();
-}
-
-// Enable map interaction
-function enableMapInteraction() {
-    const mapOverlay = document.getElementById('map-overlay');
-    
-    // Hide overlay
-    mapOverlay.classList.add('hidden');
-    
-    // Enable map controls
-    map.dragging.enable();
-    map.touchZoom.enable();
-    map.doubleClickZoom.enable();
-    map.scrollWheelZoom.enable();
-    map.boxZoom.enable();
-    map.keyboard.enable();
-    
-    isMapInteractive = true;
-    
-    // Set up global event listeners for inactivity detection
-    setupInactivityTimer();
-    
-    // Reset inactivity timer
-    resetInactivityTimer();
-}
-
-// Disable map interaction
-function disableMapInteraction() {
-    const mapOverlay = document.getElementById('map-overlay');
-    
-    // Ensure map is fully loaded before disabling
-    if (!map._loaded) return;
-    
-    // Show overlay
-    mapOverlay.classList.remove('hidden');
-    
-    // Disable map controls
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
-    map.boxZoom.disable();
-    map.keyboard.disable();
-    
-    isMapInteractive = false;
-}
-
-// Set up inactivity timer
-function setupInactivityTimer() {
-    // Listen for all possible interactions
-    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    
-    events.forEach(event => {
-        document.addEventListener(event, resetInactivityTimer, true);
-    });
-    
-    // Leaflet-specific events
-    map.on('click', resetInactivityTimer);
-    map.on('mousemove', resetInactivityTimer);
-    map.on('zoom', resetInactivityTimer);
-    map.on('drag', resetInactivityTimer);
-    map.on('popupopen', resetInactivityTimer);
-}
-
-// Reset inactivity timer
-function resetInactivityTimer() {
-    if (!isMapInteractive) return;
-    
-    // Clear existing timer
-    if (mapInteractionTimer) {
-        clearTimeout(mapInteractionTimer);
-    }
-    
-    // Set new timer
-    mapInteractionTimer = setTimeout(function() {
-        if (isMapInteractive) {
-            disableMapInteraction();
-        }
-    }, MAP_TIMEOUT);
-}
-
 // Search functionality
 const searchInput = document.getElementById('search-input');
 
@@ -3180,109 +3425,158 @@ const expandButton = document.getElementById('expand-button');
 const yogaSection = document.querySelector('.yoga-section');
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listeners
-    closeDetail.addEventListener('click', () => {
-        studioDetail.classList.remove('active');
-    });
-
-    applyFiltersBtn.addEventListener('click', applyFilters);
-    resetFiltersBtn.addEventListener('click', resetFilters);
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('🚀 DOM cargado, inicializando aplicación...');
     
-    // Search event listeners
-    searchInput.addEventListener('input', function() {
-        performSearch(this.value);
-    });
+    // Inicializar el mapa PRIMERO
+    initializeMap();
+    
+    // Configurar event listeners básicos
+    setupEventListeners();
+    
+    // CARGAR DATOS DESDE EL JSON
+    try {
+        await loadStudiosData();
+        console.log('✅ Datos cargados, inicializando UI...');
+        
+        // Inicializar UI con los datos cargados
+        initializeUI();
+        
+    } catch (error) {
+        console.error('❌ Error inicializando con datos JSON:', error);
+        // Inicializar con datos de respaldo
+        initializeUI();
+    }
+});
 
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
+// Función para configurar event listeners
+function setupEventListeners() {
+    const closeDetail = document.getElementById('close-detail');
+    const applyFiltersBtn = document.getElementById('apply-filters');
+    const resetFiltersBtn = document.getElementById('reset-filters');
+    const searchInput = document.getElementById('search-input');
+    const expandButton = document.getElementById('expand-button');
+    const yogaSection = document.querySelector('.yoga-section');
+    
+    if (closeDetail) {
+        closeDetail.addEventListener('click', () => {
+            studioDetail.classList.remove('active');
+        });
+    }
+
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', applyFilters);
+    }
+    
+    if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', resetFilters);
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
             performSearch(this.value);
-        }
-    });
+        });
 
-    // Expand button
-    expandButton.addEventListener('click', function() {
-        yogaSection.classList.toggle('expanded');
-        
-        if (yogaSection.classList.contains('expanded')) {
-            expandButton.innerHTML = '<i class="fas fa-compress"></i>';
-        } else {
-            expandButton.innerHTML = '<i class="fas fa-expand"></i>';
-        }
-        
-        // Redibujar el mapa cuando se cambia el tamaño
-        setTimeout(function() {
-            map.invalidateSize();
-        }, 300);
-    });
-    
-    // Wait a brief moment for map to fully initialize
-    setTimeout(function() {
-        // Render all studios initially
-        renderStudiosList(studiosData);
-        
-        // Populate filters
-        populateFilters();
-        
-        // Add studios to map
-        addStudiosToMap(studiosData);
-        
-        // Initialize map interaction functionality
-        initializeMapInteraction();
-        
-        // Configuración inicial según el tamaño de pantalla
-        const mapActionsContainer = document.querySelector('.map-actions-container');
-        const mobileNavBottom = document.querySelector('.mobile-nav-bottom');
-        
-        console.log('Configuración inicial, ancho:', window.innerWidth);
-        
-        if (window.innerWidth <= 1000) {
-            // Móvil
-            console.log('Inicializando en modo móvil');
-            initializeMobileNavigation();
-            if (mapActionsContainer) mapActionsContainer.style.display = 'none';
-            if (mobileNavBottom) mobileNavBottom.style.display = 'flex';
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value);
+            }
+        });
+    }
+
+    if (expandButton && yogaSection) {
+        expandButton.addEventListener('click', function() {
+            yogaSection.classList.toggle('expanded');
             
-            // Asegurar que el botón expandir solo esté visible en vista de mapa
-            if (yogaSection.classList.contains('show-map')) {
-                expandButton.style.display = 'flex';
+            if (yogaSection.classList.contains('expanded')) {
+                expandButton.innerHTML = '<i class="fas fa-compress"></i>';
             } else {
-                expandButton.style.display = 'none';
+                expandButton.innerHTML = '<i class="fas fa-expand"></i>';
             }
             
-            // Estado inicial en móvil: mostrar mapa
-            yogaSection.classList.add('show-map');
-            document.getElementById('mobile-nav-map').classList.add('active');
-        } else {
-            // Desktop
-            console.log('Inicializando en modo desktop');
-            if (mapActionsContainer) mapActionsContainer.style.display = 'flex';
-            if (mobileNavBottom) mobileNavBottom.style.display = 'none';
-            
-            // Estado inicial en desktop: mostrar lista de estudios, no filtros
-            const filterPanel = document.querySelector('.filter-panel');
-            if (filterPanel) filterPanel.classList.remove('showing-filters');
-            const filterToggleBtn = document.getElementById('filter-toggle-btn');
-            if (filterToggleBtn) filterToggleBtn.classList.remove('active');
-            
-            // Mostrar solo lista de estudios inicialmente
-            const filterSection = document.querySelector('.filter-section');
-            const studiosListSection = document.querySelector('.studios-list-section');
-            if (filterSection) filterSection.style.display = 'none';
-            if (studiosListSection) studiosListSection.style.display = 'flex';
-            
-            // Mostrar siempre el botón expandir en desktop
-            expandButton.style.display = 'flex';
-            
-            // Resetear estados de vista móvil
-            yogaSection.classList.remove('show-map', 'show-studios', 'show-filters');
-        }
+            setTimeout(function() {
+                if (map) {
+                    map.invalidateSize(true);
+                    console.log('🗺️ Mapa redibujado después de expandir/contraer');
+                }
+            }, 300);
+        });
+    }
+}
+
+// Nueva función para inicializar la UI después de cargar datos
+function initializeUI() {
+    setTimeout(function() {
+        console.log('🎨 Inicializando UI con', studiosData.length, 'estudios...');
+        
+        // Renderizar lista de estudios
+        renderStudiosList(studiosData);
+        
+        // Poblar filtros
+        populateFilters();
+        
+        // Agregar estudios al mapa
+        addStudiosToMap(studiosData);
+        
+        // Configuración responsive
+        setupResponsiveLayout();
         
         // Inicializar botón de filtros en el header
         initializeHeaderFilterButton();
-    }, 100);
-});
+        
+        console.log('✅ Aplicación completamente inicializada');
+        
+    }, 500);
+}
 
+// Función para configuración responsive
+function setupResponsiveLayout() {
+    const mapActionsContainer = document.querySelector('.map-actions-container');
+    const mobileNavBottom = document.querySelector('.mobile-nav-bottom');
+    const expandButton = document.getElementById('expand-button');
+    const yogaSection = document.querySelector('.yoga-section');
+    
+    console.log('📱 Configuración responsive, ancho:', window.innerWidth);
+    
+    if (window.innerWidth <= 1000) {
+        // Móvil
+        console.log('📱 Inicializando en modo móvil');
+        initializeMobileNavigation();
+        if (mapActionsContainer) mapActionsContainer.style.display = 'none';
+        if (mobileNavBottom) mobileNavBottom.style.display = 'flex';
+        
+        // Estado inicial en móvil: mostrar mapa
+        if (yogaSection) {
+            yogaSection.classList.add('show-map');
+        }
+        const mobileNavMap = document.getElementById('mobile-nav-map');
+        if (mobileNavMap) mobileNavMap.classList.add('active');
+        
+    } else {
+        // Desktop
+        console.log('🖥️ Inicializando en modo desktop');
+        if (mapActionsContainer) mapActionsContainer.style.display = 'flex';
+        if (mobileNavBottom) mobileNavBottom.style.display = 'none';
+        
+        // Estado inicial en desktop
+        const filterPanel = document.querySelector('.filter-panel');
+        if (filterPanel) filterPanel.classList.remove('showing-filters');
+        const filterToggleBtn = document.getElementById('filter-toggle-btn');
+        if (filterToggleBtn) filterToggleBtn.classList.remove('active');
+        
+        // Mostrar lista de estudios inicialmente
+        const filterSection = document.querySelector('.filter-section');
+        const studiosListSection = document.querySelector('.studios-list-section');
+        if (filterSection) filterSection.style.display = 'none';
+        if (studiosListSection) {
+            studiosListSection.style.display = 'flex';
+            studiosListSection.style.flexDirection = 'column';
+        }
+        
+        // Mostrar siempre el botón expandir en desktop
+        if (expandButton) expandButton.style.display = 'flex';
+    }
+}
 // Ajustar para cambios de tamaño de ventana
 window.addEventListener('resize', function() {
     const yogaSection = document.querySelector('.yoga-section');
@@ -3294,54 +3588,67 @@ window.addEventListener('resize', function() {
     
     if (window.innerWidth <= 1000) {
         console.log('Cambiando a modo móvil');
-        initializeMobileNavigation();
         
         // En móvil: ocultar acciones del header, mostrar navegación inferior
         if (mapActionsContainer) mapActionsContainer.style.display = 'none';
         if (mobileNavBottom) mobileNavBottom.style.display = 'flex';
         
-        // Ajustar visibilidad del botón expandir según la vista actual
-        if (yogaSection.classList.contains('show-map')) {
-            expandButton.style.display = 'flex';
-        } else {
-            expandButton.style.display = 'none';
-        }
+        // Reinicializar navegación móvil
+        initializeMobileNavigation();
         
-        // Asegurar que la vista actual se muestre correctamente
-        if (yogaSection.classList.contains('show-filters')) {
-            const filterSection = document.querySelector('.filter-section');
+        // Ajustar visibilidad según la vista actual
+        if (yogaSection && yogaSection.classList.contains('show-map')) {
+            if (expandButton) expandButton.style.display = 'flex';
             const studiosListSection = document.querySelector('.studios-list-section');
-            if (filterSection) filterSection.style.display = 'block';
             if (studiosListSection) studiosListSection.style.display = 'none';
-        } else if (yogaSection.classList.contains('show-studios')) {
-            const filterSection = document.querySelector('.filter-section');
+        } else if (yogaSection && yogaSection.classList.contains('show-studios')) {
+            if (expandButton) expandButton.style.display = 'none';
             const studiosListSection = document.querySelector('.studios-list-section');
-            if (filterSection) filterSection.style.display = 'none';
             if (studiosListSection) studiosListSection.style.display = 'flex';
+        } else if (yogaSection && yogaSection.classList.contains('show-filters')) {
+            if (expandButton) expandButton.style.display = 'none';
+            const studiosListSection = document.querySelector('.studios-list-section');
+            if (studiosListSection) studiosListSection.style.display = 'none';
         }
     } else {
         console.log('Cambiando a modo desktop');
+        
         // En desktop: mostrar acciones del header, ocultar navegación inferior
         if (mapActionsContainer) mapActionsContainer.style.display = 'flex';
         if (mobileNavBottom) mobileNavBottom.style.display = 'none';
         
         // Mostrar siempre el botón expandir en desktop
-        expandButton.style.display = 'flex';
+        if (expandButton) expandButton.style.display = 'flex';
         
-        // Resetear estados de vista móvil y mostrar todo en desktop
-        yogaSection.classList.remove('show-map', 'show-studios', 'show-filters');
+        // IMPORTANTE: Resetear estados de vista móvil y restaurar layout desktop
+        if (yogaSection) {
+            yogaSection.classList.remove('show-map', 'show-studios', 'show-filters');
+        }
         
-        // Mostrar ambos: filtros y lista de estudios (dependiendo del estado del botón de filtros)
+        // Restaurar layout desktop normal
         const filterSection = document.querySelector('.filter-section');
         const studiosListSection = document.querySelector('.studios-list-section');
         const filterPanel = document.querySelector('.filter-panel');
         
-        if (filterPanel && filterPanel.classList.contains('showing-filters')) {
-            // Mostrar solo filtros
+        // Asegurar que todo sea visible en desktop
+        if (filterPanel) {
+            filterPanel.style.display = 'flex';
+            filterPanel.style.visibility = 'visible';
+        }
+        
+        if (studiosListSection) {
+            studiosListSection.style.display = 'flex';
+            studiosListSection.style.visibility = 'visible';
+        }
+        
+        // Si el usuario había activado filtros, mantener ese estado
+        const filterToggleBtn = document.getElementById('filter-toggle-btn');
+        if (filterPanel && filterToggleBtn && filterToggleBtn.classList.contains('active')) {
+            // Mostrar filtros si el botón está activo
             if (filterSection) filterSection.style.display = 'block';
             if (studiosListSection) studiosListSection.style.display = 'none';
         } else {
-            // Mostrar solo lista de estudios
+            // Mostrar lista de estudios por defecto
             if (filterSection) filterSection.style.display = 'none';
             if (studiosListSection) studiosListSection.style.display = 'flex';
         }
@@ -3349,7 +3656,10 @@ window.addEventListener('resize', function() {
     
     // Redibujar el mapa
     setTimeout(function() {
-        map.invalidateSize();
+        if (map) {
+            map.invalidateSize(true);
+            console.log('Mapa redibujado después de resize');
+        }
     }, 300);
 });
 
@@ -3360,6 +3670,81 @@ function closeStudioDetail() {
         studioDetail.classList.remove('active');
     }
 }
+
+
+
+
+// FUNCIÓN SIMPLIFICADA PARA SCROLLBAR
+function fixScrollbarIssue() {
+    const studiosListContainer = document.querySelector('.studios-list-container');
+    const studioItems = document.querySelectorAll('.studio-item');
+    
+    console.log('Fix scrollbar ejecutado. Ancho:', window.innerWidth, 'Items:', studioItems.length);
+    
+    if (window.innerWidth <= 1000 && window.innerWidth >= 769) {
+        console.log('Aplicando fix para pantallas intermedias');
+        
+        if (studiosListContainer) {
+            // Forzar estilos específicos
+            studiosListContainer.style.overflowY = 'auto';
+            studiosListContainer.style.display = 'block';
+            studiosListContainer.style.position = 'relative';
+
+            studiosListContainer.style.borderRadius = '8px';
+            studiosListContainer.style.padding = '10px';
+            studiosListContainer.style.marginTop = '10px';
+            
+            // Asegurar que el contenido sea suficiente para scroll
+            const contentHeight = studiosListContainer.scrollHeight;
+            const containerHeight = studiosListContainer.clientHeight;
+            
+            console.log('Altura contenido:', contentHeight, 'Altura contenedor:', containerHeight);
+            
+            if (contentHeight > containerHeight) {
+                console.log('Contenido suficiente para scroll - OK');
+            } else {
+                console.log('Contenido insuficiente, agregando padding');
+                studiosListContainer.style.paddingBottom = '50px';
+            }
+            
+            // Forzar repaint
+            studiosListContainer.style.display = 'none';
+            studiosListContainer.offsetHeight; // Trigger reflow
+            studiosListContainer.style.display = 'block';
+        }
+    }
+}
+
+// EJECUTAR EN MÚLTIPLES EVENTOS
+window.addEventListener('load', function() {
+    setTimeout(fixScrollbarIssue, 1000);
+});
+
+window.addEventListener('resize', function() {
+    setTimeout(fixScrollbarIssue, 300);
+    setTimeout(function() {
+        if (map) {
+            map.invalidateSize(true);
+        }
+    }, 300);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        renderStudiosList(studiosData);
+        populateFilters();
+        addStudiosToMap(studiosData);
+        setTimeout(fixScrollbarIssue, 1500);
+    }, 100);
+});
+
+// Función dummy para inactivity timer (si existe en tu código)
+function resetInactivityTimer() {
+    // Esta función parece estar relacionada con algún sistema de inactividad
+    // Si no la usas, puedes eliminarla
+    console.log('Reset inactivity timer');
+}
+
 </script>
 
 
@@ -3371,6 +3756,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const burgerIcon = document.querySelector('.burger-icon');
+    
+    
+
     
     mobileMenuToggle.addEventListener('click', function() {
         mobileMenu.classList.toggle('active');
@@ -3466,6 +3854,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateActiveNavLink);
     window.addEventListener('load', updateActiveNavLink);
     setupSmoothScroll();
+        setTimeout(adjustPanelHeights, 500);
+
 });
 
 
@@ -3483,6 +3873,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.cursor = 'default';
     });
 });
+
 </script>
 
 
