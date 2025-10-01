@@ -1,64 +1,508 @@
-{
-  "studios": [
+[
     {
-      "name": "Estudio Dharma",
-      "logo": "lotus-negro",
-      "lat": -34.6190,
-      "lng": -58.4414,
-      "styles": ["Hatha", "Vinyasa", "Yin"],
-      "level": ["Beginner", "Intermediate"],
-      "amenities": ["Mats", "Showers", "Changing Rooms"],
-      "website": "#",
-      "barrio": "caballito",
-      "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga."
+        "name": "Estudio Dharma",
+        "logo": "lotus-negro",
+        "lat": -34.6190,
+        "lng": -58.4414,
+        "styles": ["Hatha", "Vinyasa", "Yin"],
+        "level": ["Beginner", "Intermediate"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Showers", "Changing Rooms"],
+        "website": "https://estudiodharma.com",
+        "barrio": "caballito",
+        "address": "Av. Rivadavia 1234, Caballito",
+        "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga.",
+        "instagram": "@dharma",
+        "schedule": [
+            {
+                "day": "Lunes",
+                "classes": [
+                    { "time": "08:00", "name": "Hatha Yoga" },
+                    { "time": "18:00", "name": "Vinyasa Flow" },
+                    { "time": "20:00", "name": "Yin Yoga" }
+                ]
+            },
+            {
+                "day": "Martes",
+                "classes": [
+                    { "time": "09:00", "name": "Power Yoga" },
+                    { "time": "19:00", "name": "Hatha Yoga" }
+                ]
+            }
+        ]
     },
     {
-      "name": "Yoga Vida",
-      "logo": "yoga-vida",
-      "lat": -34.6030,
-      "lng": -58.3914,
-      "styles": ["Vinyasa", "Ashtanga"],
-      "level": ["Intermediate", "Advanced"],
-      "amenities": ["Mats", "Showers", "Cafe", "Retail"],
-      "website": "#",
-      "barrio": "recoleta",
-      "description": "Yoga Vida offers dynamic classes for practitioners looking to deepen their practice in a supportive community environment."
+        "name": "Yoga Palermo",
+        "logo": "om-symbol",
+        "lat": -34.5828,
+        "lng": -58.4254,
+        "styles": ["Vinyasa", "Ashtanga", "Hot Yoga"],
+        "level": ["All Levels"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Towels", "Showers", "Lockers"],
+        "website": "https://yogapalermo.com.ar",
+        "barrio": "palermo",
+        "address": "Thames 2345, Palermo",
+        "description": "Estudio moderno especializado en prácticas dinámicas. Contamos con sala climatizada para hot yoga y profesores certificados internacionalmente.",
+        "instagram": "@yogapalermo",
+        "schedule": [
+            {
+                "day": "Lunes",
+                "classes": [
+                    { "time": "07:00", "name": "Ashtanga Mysore" },
+                    { "time": "12:00", "name": "Vinyasa Flow" },
+                    { "time": "19:00", "name": "Hot Yoga" }
+                ]
+            }
+        ]
     },
     {
-      "name": "Peaceful Studio",
-      "logo": "peaceful",
-      "lat": -34.5750,
-      "lng": -58.4314,
-      "styles": ["Yin", "Restorative"],
-      "level": ["Beginner"],
-      "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
-      "website": "#",
-      "barrio": "palermo",
-      "description": "A tranquil space focused on slow, mindful practices that help you connect with your inner self and find peace."
+        "name": "Shanti Yoga Recoleta",
+        "logo": "mandala",
+        "lat": -34.5895,
+        "lng": -58.3934,
+        "styles": ["Hatha", "Restorative", "Prenatal"],
+        "level": ["Beginner", "Senior"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Props", "Tea Bar"],
+        "website": "https://shantiyoga.com.ar",
+        "barrio": "recoleta",
+        "address": "Junín 1234, Recoleta",
+        "description": "Espacio tranquilo enfocado en yoga terapéutico y meditación. Ideal para quienes buscan alivio del estrés y conexión interior.",
+        "instagram": "@shantirecoleta",
+        "schedule": [
+            {
+                "day": "Martes",
+                "classes": [
+                    { "time": "10:00", "name": "Hatha Suave" },
+                    { "time": "17:00", "name": "Yoga Restaurativo" },
+                    { "time": "19:00", "name": "Meditación Guiada" }
+                ]
+            }
+        ]
     },
     {
-      "name": "Power Flow Yoga",
-      "logo": "power-flow",
-      "lat": -34.5950,
-      "lng": -58.4014,
-      "styles": ["Power Yoga", "Vinyasa"],
-      "level": ["Intermediate", "Advanced"],
-      "amenities": ["Mats", "Showers", "Lockers", "Retail"],
-      "website": "#",
-      "barrio": "belgrano",
-      "description": "Challenge yourself with our powerful vinyasa flows designed to build strength and flexibility."
+        "name": "Buenos Aires Power Yoga",
+        "logo": "sol",
+        "lat": -34.6037,
+        "lng": -58.3816,
+        "styles": ["Power Yoga", "Vinyasa", "Core Yoga"],
+        "level": ["Intermediate", "Advanced"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Showers", "Changing Rooms", "Water Station"],
+        "website": "https://bapoweryoga.com",
+        "barrio": "microcentro",
+        "address": "Florida 456, Microcentro",
+        "description": "Estudio dinámico para practicantes que buscan desafío físico y mental. Clases intensivas que combinan fuerza y flexibilidad.",
+        "instagram": "@bapoweryoga",
+        "schedule": [
+            {
+                "day": "Miércoles",
+                "classes": [
+                    { "time": "07:00", "name": "Power Yoga" },
+                    { "time": "13:00", "name": "Core Vinyasa" },
+                    { "time": "18:30", "name": "Advanced Flow" }
+                ]
+            }
+        ]
     },
     {
-      "name": "Sunrise Yoga",
-      "logo": "sunrise",
-      "lat": -34.5890,
-      "lng": -58.4114,
-      "styles": ["Hatha", "Gentle Yoga"],
-      "level": ["Beginner"],
-      "amenities": ["Mats", "Tea Bar", "Changing Rooms"],
-      "website": "#",
-      "barrio": "palermo",
-      "description": "Start your day with our gentle morning classes that focus on alignment and mindful movement."
+        "name": "Yin San Telmo",
+        "logo": "luna",
+        "lat": -34.6212,
+        "lng": -58.3731,
+        "styles": ["Yin Yoga", "Restorative", "Meditation"],
+        "level": ["All Levels"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Bolsters", "Blankets", "Eye Pillows"],
+        "website": "https://yinsantelmo.com.ar",
+        "barrio": "san telmo",
+        "address": "Defensa 789, San Telmo",
+        "description": "Especialistas en yoga Yin y prácticas restaurativas. Ambiente histórico con energía tranquila y relajante.",
+        "instagram": "@yinsantelmo",
+        "schedule": [
+            {
+                "day": "Jueves",
+                "classes": [
+                    { "time": "09:00", "name": "Yin Yoga" },
+                    { "time": "16:00", "name": "Yin Yang" },
+                    { "time": "20:00", "name": "Yin Nocturno" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Alma Yoga Belgrano",
+        "logo": "arbol",
+        "lat": -34.5627,
+        "lng": -58.4559,
+        "styles": ["Hatha", "Vinyasa", "Kundalini"],
+        "level": ["Beginner", "Intermediate"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Showers", "Garden", "Library"],
+        "website": "https://almayoga.com.ar",
+        "barrio": "belgrano",
+        "address": "Juramento 2345, Belgrano",
+        "description": "Casa remodelada con jardín interior donde practicar yoga en conexión con la naturaleza. Enfoque holístico del bienestar.",
+        "instagram": "@almayoga",
+        "schedule": [
+            {
+                "day": "Viernes",
+                "classes": [
+                    { "time": "08:00", "name": "Hatha Matutino" },
+                    { "time": "11:00", "name": "Kundalini" },
+                    { "time": "18:00", "name": "Vinyasa Flow" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Urban Flow",
+        "logo": "ola",
+        "lat": -34.5955,
+        "lng": -58.4316,
+        "styles": ["Vinyasa", "Rocket", "AcroYoga"],
+        "level": ["Intermediate", "Advanced"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Showers", "AcroYoga Equipment"],
+        "website": "https://urbanflow.com.ar",
+        "barrio": "villa crespo",
+        "address": "Gurruchaga 1234, Villa Crespo",
+        "description": "Comunidad joven y dinámica especializada en prácticas desafiantes. Ofrecemos workshops regulares de acroyoga y arm balances.",
+        "instagram": "@urbanflow",
+        "schedule": [
+            {
+                "day": "Sábado",
+                "classes": [
+                    { "time": "09:00", "name": "Rocket Yoga" },
+                    { "time": "11:00", "name": "AcroYoga" },
+                    { "time": "16:00", "name": "Advanced Vinyasa" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga Nidra Studio",
+        "logo": "nube",
+        "lat": -34.6089,
+        "lng": -58.4375,
+        "styles": ["Yoga Nidra", "Restorative", "Meditation"],
+        "level": ["All Levels"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Bolsters", "Blankets", "Heating"],
+        "website": "https://yoganidraba.com.ar",
+        "barrio": "almagro",
+        "address": "Av. Corrientes 3456, Almagro",
+        "description": "Primer estudio especializado en Yoga Nidra de Buenos Aires. Ambiente cálido y oscuro ideal para la relajación profunda.",
+        "instagram": "@yoganidraba",
+        "schedule": [
+            {
+                "day": "Domingo",
+                "classes": [
+                    { "time": "10:00", "name": "Yoga Nidra" },
+                    { "time": "17:00", "name": "Restaurativo" },
+                    { "time": "20:00", "name": "Nidra Nocturno" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Ashtanga Traditional",
+        "logo": "serpiente",
+        "lat": -34.5753,
+        "lng": -58.4402,
+        "styles": ["Ashtanga", "Mysore"],
+        "level": ["All Levels"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Showers", "Changing Rooms"],
+        "website": "https://ashtangatradicional.com.ar",
+        "barrio": "colegiales",
+        "address": "Conde 789, Colegiales",
+        "description": "Práctica tradicional de Ashtanga Yoga según las enseñanzas de Pattabhi Jois. Programa Mysore style todas las mañanas.",
+        "instagram": "@ashtangatrad",
+        "schedule": [
+            {
+                "day": "Lunes a Viernes",
+                "classes": [
+                    { "time": "06:00", "name": "Mysore Practice" },
+                    { "time": "18:00", "name": "Led Primary" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga & Pilates Nuñez",
+        "logo": "lotus-blanco",
+        "lat": -34.5478,
+        "lng": -58.4675,
+        "styles": ["Hatha", "Vinyasa", "Pilates"],
+        "level": ["Beginner", "Intermediate"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Pilates Equipment", "Showers"],
+        "website": "https://yogapilatesnunez.com",
+        "barrio": "nuñez",
+        "address": "Av. del Libertador 5678, Nuñez",
+        "description": "Centro integral que combina yoga y pilates para un trabajo completo de cuerpo y mente. Ideal para rehabilitación y fortalecimiento.",
+        "instagram": "@yogapilatesnunez",
+        "schedule": [
+            {
+                "day": "Lunes",
+                "classes": [
+                    { "time": "08:00", "name": "Hatha Yoga" },
+                    { "time": "10:00", "name": "Pilates Mat" },
+                    { "time": "17:00", "name": "Yoga Flow" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Medita Yoga",
+        "logo": "om",
+        "lat": -34.5991,
+        "lng": -58.4203,
+        "styles": ["Hatha", "Meditation", "Mindfulness"],
+        "level": ["Beginner", "All Levels"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Cushions", "Tea Corner"],
+        "website": "https://meditayoga.com.ar",
+        "barrio": "palermo",
+        "address": "Humboldt 1234, Palermo",
+        "description": "Enfoque en la meditación y mindfulness integrado con práctica de asanas. Espacio silencioso y contemplativo.",
+        "instagram": "@meditayoga",
+        "schedule": [
+            {
+                "day": "Martes",
+                "classes": [
+                    { "time": "09:00", "name": "Hatha & Meditación" },
+                    { "time": "16:00", "name": "Mindfulness Yoga" },
+                    { "time": "19:00", "name": "Meditación Grupal" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Aerial Yoga BA",
+        "logo": "hamaca",
+        "lat": -34.6105,
+        "lng": -58.4287,
+        "styles": ["Aerial Yoga", "Vinyasa"],
+        "level": ["All Levels"],
+        "intensity": "Moderada",
+        "amenities": ["Aerial Hammocks", "Mats", "Showers"],
+        "website": "https://aerialyogaba.com.ar",
+        "barrio": "villa crespo",
+        "address": "Av. Dorrego 2345, Villa Crespo",
+        "description": "Estudio especializado en yoga aéreo con hamacas. Mejora tu flexibilidad y fuerza mientras te diviertes volando.",
+        "instagram": "@aerialyogaba",
+        "schedule": [
+            {
+                "day": "Miércoles",
+                "classes": [
+                    { "time": "10:00", "name": "Aerial Beginners" },
+                    { "time": "16:00", "name": "Aerial Flow" },
+                    { "time": "18:00", "name": "Aerial Advanced" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga Para Embarazadas",
+        "logo": "flor",
+        "lat": -34.5889,
+        "lng": -58.4298,
+        "styles": ["Prenatal", "Postnatal", "Restorative"],
+        "level": ["Beginner"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Props", "Nursing Room"],
+        "website": "https://yogaembarazadas.com.ar",
+        "barrio": "palermo",
+        "address": "Malabia 1234, Palermo",
+        "description": "Espacio exclusivo para embarazadas y mamás recientes. Clases especializadas con profesores entrenados en yoga prenatal.",
+        "instagram": "@yogaembarazadas",
+        "schedule": [
+            {
+                "day": "Jueves",
+                "classes": [
+                    { "time": "11:00", "name": "Yoga Prenatal" },
+                    { "time": "16:00", "name": "Yoga Postnatal" },
+                    { "time": "18:00", "name": "Mamás y Bebés" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Hot Yoga Puerto Madero",
+        "logo": "sol-calido",
+        "lat": -34.6118,
+        "lng": -58.3627,
+        "styles": ["Hot Yoga", "Bikram", "Hot Vinyasa"],
+        "level": ["Intermediate", "Advanced"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Towels", "Showers", "Lockers"],
+        "website": "https://hotyogapm.com.ar",
+        "barrio": "puerto madero",
+        "address": "Alicia Moreau de Justo 1234, Puerto Madero",
+        "description": "Estudio de lujo con salas climatizadas a 40°C. Experiencia completa de hot yoga con todos los servicios premium.",
+        "instagram": "@hotyogapm",
+        "schedule": [
+            {
+                "day": "Viernes",
+                "classes": [
+                    { "time": "07:00", "name": "Hot Vinyasa" },
+                    { "time": "09:00", "name": "Bikram Method" },
+                    { "time": "18:00", "name": "Hot Power" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga Corporativo",
+        "logo": "edificio",
+        "lat": -34.6023,
+        "lng": -58.3745,
+        "styles": ["Hatha", "Chair Yoga", "Stretching"],
+        "level": ["Beginner"],
+        "intensity": "Suave",
+        "amenities": ["Mats", "Chairs", "Changing Rooms"],
+        "website": "https://yogacorporativo.com.ar",
+        "barrio": "retiro",
+        "address": "San Martín 1234, Retiro",
+        "description": "Especialistas en yoga para oficinas y empresas. Clases diseñadas para aliviar el estrés laboral y mejorar la postura.",
+        "instagram": "@yogacorporativo",
+        "schedule": [
+            {
+                "day": "Lunes a Viernes",
+                "classes": [
+                    { "time": "08:00", "name": "Yoga Matutino" },
+                    { "time": "13:00", "name": "Yoga en Silla" },
+                    { "time": "18:00", "name": "Desestrés Laboral" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Kundalini Rising",
+        "logo": "serpiente-energia",
+        "lat": -34.6245,
+        "lng": -58.4521,
+        "styles": ["Kundalini", "Meditation", "Breathwork"],
+        "level": ["All Levels"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Cushions", "White Clothing"],
+        "website": "https://kundalinirising.com.ar",
+        "barrio": "boedo",
+        "address": "Av. Boedo 2345, Boedo",
+        "description": "Comunidad dedicada a la práctica de Kundalini Yoga según las enseñanzas de Yogi Bhajan. Clases con mantras y meditación.",
+        "instagram": "@kundaliniba",
+        "schedule": [
+            {
+                "day": "Sábado",
+                "classes": [
+                    { "time": "08:00", "name": "Kundalini Sunrise" },
+                    { "time": "11:00", "name": "Breathwork" },
+                    { "time": "17:00", "name": "Kundalini Evening" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga Deportivo",
+        "logo": "atleta",
+        "lat": -34.5678,
+        "lng": -58.4456,
+        "styles": ["Power Yoga", "Stretching", "Mobility"],
+        "level": ["Intermediate", "Advanced"],
+        "intensity": "Alta",
+        "amenities": ["Mats", "Blocks", "Straps", "Showers"],
+        "website": "https://yogadeportivo.com.ar",
+        "barrio": "belgrano",
+        "address": "Blanco Encalada 1234, Belgrano",
+        "description": "Yoga aplicado al rendimiento deportivo. Mejora tu flexibilidad, movilidad y prevención de lesiones.",
+        "instagram": "@yogadeportivo",
+        "schedule": [
+            {
+                "day": "Domingo",
+                "classes": [
+                    { "time": "09:00", "name": "Yoga para Corredores" },
+                    { "time": "11:00", "name": "Movilidad Avanzada" },
+                    { "time": "16:00", "name": "Stretching Profundo" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga en Parque",
+        "logo": "arbol-naturaleza",
+        "lat": -34.5801,
+        "lng": -58.4223,
+        "styles": ["Hatha", "Vinyasa", "Meditation"],
+        "level": ["All Levels"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Outdoor Equipment"],
+        "website": "https://yogaenparque.com.ar",
+        "barrio": "palermo",
+        "address": "Parque 3 de Febrero, Palermo",
+        "description": "Clases al aire libre en el hermoso entorno del Rosedal. Conecta con la naturaleza mientras practicas yoga.",
+        "instagram": "@yogaenparque",
+        "schedule": [
+            {
+                "day": "Sábado y Domingo",
+                "classes": [
+                    { "time": "09:00", "name": "Hatha en Parque" },
+                    { "time": "11:00", "name": "Vinyasa Flow" },
+                    { "time": "17:00", "name": "Meditación al Atardecer" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga para Tercera Edad",
+        "logo": "sol-suave",
+        "lat": -34.6123,
+        "lng": -58.4389,
+        "styles": ["Chair Yoga", "Gentle Yoga", "Restorative"],
+        "level": ["Beginner", "Senior"],
+        "intensity": "Suave",
+        "amenities": ["Chairs", "Mats", "Props", "Accessibility"],
+        "website": "https://yogaterceraedad.com.ar",
+        "barrio": "almagro",
+        "address": "Av. Medrano 1234, Almagro",
+        "description": "Clases especializadas para adultos mayores. Enfoque en movilidad articular, equilibrio y bienestar general.",
+        "instagram": "@yogamayores",
+        "schedule": [
+            {
+                "day": "Lunes a Viernes",
+                "classes": [
+                    { "time": "10:00", "name": "Yoga en Silla" },
+                    { "time": "15:00", "name": "Yoga Suave" },
+                    { "time": "17:00", "name": "Movilidad Articular" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Yoga Fusion",
+        "logo": "mandala-moderno",
+        "lat": -34.6045,
+        "lng": -58.3867,
+        "styles": ["Vinyasa", "Dance", "Pilates"],
+        "level": ["All Levels"],
+        "intensity": "Moderada",
+        "amenities": ["Mats", "Mirrors", "Sound System", "Showers"],
+        "website": "https://yogafusion.com.ar",
+        "barrio": "recoleta",
+        "address": "Paraguay 1234, Recoleta",
+        "description": "Fusionamos yoga con danza y pilates para una experiencia única y creativa. Clases dinámicas con música inspiradora.",
+        "instagram": "@yogafusionba",
+        "schedule": [
+            {
+                "day": "Viernes",
+                "classes": [
+                    { "time": "09:00", "name": "Yoga Dance" },
+                    { "time": "16:00", "name": "Pilates Fusion" },
+                    { "time": "19:00", "name": "Vinyasa Creativo" }
+                ]
+            }
+        ]
     }
-  ]
-}
+]
