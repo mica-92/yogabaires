@@ -2276,6 +2276,35 @@ a, button, .filter-option, .studio-item, .read-more-btn, .instagram-btn,
 input[type="text"], input[type="search"], textarea {
     cursor: text;
 }
+
+
+/* Estilos para tags activas en popups */
+.pop-tag.active {
+    background-color: var(--primary-green) !important;
+    color: var(--primary) !important;
+    border-color: var(--primary-green) !important;
+}
+
+.pop-tag.pop-barrio-tag {
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    color: white;
+}
+
+.pop-tag.pop-barrio-tag:hover {
+    background-color: #b35050;
+    transform: translateY(-2px);
+}
+
+.pop-tag[data-filter] {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pop-tag[data-filter]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 </style>
 
 </head>
@@ -2751,6 +2780,110 @@ const resetFiltersBtn = document.getElementById('reset-filters');
 // Store current highlighted studio
 let currentlyHighlightedStudio = null;
 
+
+// ===== NUEVO: SISTEMA DE FILTROS DESDE POPUPS =====
+// Variables para rastrear filtros activos
+let activeFilters = {
+    barrio: null,
+    styles: null,
+    level: null
+};
+
+// Función para aplicar filtro desde popup
+function applyFilterFromPopup(filterType, filterValue, element) {
+    // Si ya está activo este filtro, desactivarlo
+    if (activeFilters[filterType] === filterValue) {
+        removeFilterFromPopup(filterType, element);
+        return;
+    }
+    
+    // Limpiar filtro anterior del mismo tipo
+    if (activeFilters[filterType]) {
+        const previousActiveElements = document.querySelectorAll(`.pop-tag[data-filter="${filterType}"].active`);
+        previousActiveElements.forEach(el => el.classList.remove('active'));
+    }
+    
+    // Aplicar nuevo filtro
+    activeFilters[filterType] = filterValue;
+    element.classList.add('active');
+    
+    // Aplicar filtros al mapa y lista
+    applyActiveFilters();
+}
+
+// Función para remover filtro desde popup
+function removeFilterFromPopup(filterType, element) {
+    activeFilters[filterType] = null;
+    element.classList.remove('active');
+    
+    // Aplicar filtros (que ahora no incluyen este)
+    applyActiveFilters();
+}
+
+// Función para aplicar todos los filtros activos
+function applyActiveFilters() {
+    const filteredStudios = studiosData.filter(studio => {
+        // Verificar filtro de barrio
+        if (activeFilters.barrio && studio.barrio !== activeFilters.barrio) {
+            return false;
+        }
+        
+        // Verificar filtro de estilos
+        if (activeFilters.styles && !studio.styles.includes(activeFilters.styles)) {
+            return false;
+        }
+        
+        // Verificar filtro de niveles
+        if (activeFilters.level && !studio.level.includes(activeFilters.level)) {
+            return false;
+        }
+        
+        return true;
+    });
+    
+    // Actualizar mapa y lista
+    addStudiosToMap(filteredStudios);
+    renderStudiosList(filteredStudios);
+    
+    // Actualizar también los filtros en el panel lateral para mantener consistencia
+    updateSidebarFilters();
+    
+    // Actualizar tags en popups
+    updatePopupFilterTags();
+}
+
+// Función para actualizar los filtros del sidebar según los activos
+function updateSidebarFilters() {
+    // Limpiar todos los filtros activos en el sidebar
+    document.querySelectorAll('.filter-option.active').forEach(option => {
+        option.classList.remove('active');
+    });
+    
+    // Activar los correspondientes según los filtros activos
+    Object.entries(activeFilters).forEach(([filterType, filterValue]) => {
+        if (filterValue) {
+            const sidebarOption = document.querySelector(`.filter-option[data-category="${filterType}"][data-value="${filterValue}"]`);
+            if (sidebarOption) {
+                sidebarOption.classList.add('active');
+            }
+        }
+    });
+}
+
+// Función para actualizar tags en popups según activeFilters
+function updatePopupFilterTags() {
+    document.querySelectorAll('.pop-tag[data-filter]').forEach(tag => {
+        const filterType = tag.dataset.filter;
+        const filterValue = tag.dataset.value;
+        
+        if (activeFilters[filterType] === filterValue) {
+            tag.classList.add('active');
+        } else {
+            tag.classList.remove('active');
+        }
+    });
+}
+
 // Function to add studios to map
 function addStudiosToMap(studios) {
     if (!map) {
@@ -2780,18 +2913,20 @@ function addStudiosToMap(studios) {
                     <h3>${studio.name}</h3>
                     <div class="tag-pop">
                         <div class="pop-tag-list">
-                        ${studio.styles.map(style => `<span class="pop-tag pop-style-tag">${style}</span>`).join('')}
-                        ${studio.level.map(level => `<span class="pop-tag pop-level-tag">${level}</span>`).join('')}
-                        ${studio.intensity ? `<span class="pop-tag pop-intensity-tag">${studio.intensity}</span>` : ''}
-                    </div></div>
+                            ${studio.barrio ? `<span class="pop-tag pop-barrio-tag" data-filter="barrio" data-value="${studio.barrio}">${studio.barrio}</span>` : ''}
+                            ${studio.styles.map(style => `<span class="pop-tag pop-style-tag" data-filter="styles" data-value="${style}">${style}</span>`).join('')}
+                            ${studio.level.map(level => `<span class="pop-tag pop-level-tag" data-filter="level" data-value="${level}">${level}</span>`).join('')}
+                            ${studio.intensity ? `<span class="pop-tag pop-intensity-tag">${studio.intensity}</span>` : ''}
+                        </div>
+                    </div>
                     <div class="studio-actions">
-                    ${studio.instagram ? `<a href="https://instagram.com/${studio.instagram.replace('@', '')}" target="_blank" class="studio-action-btn instagram-btn">
-                        <i class="fab fa-instagram" style="color: var(--primary)"></i>
-                    </a>` : ''}
-                    <button class="studio-action-btn read-more-btn" data-studio="${studio.name}">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
+                        ${studio.instagram ? `<a href="https://instagram.com/${studio.instagram.replace('@', '')}" target="_blank" class="studio-action-btn instagram-btn">
+                            <i class="fab fa-instagram" style="color: var(--primary)"></i>
+                        </a>` : ''}
+                        <button class="studio-action-btn read-more-btn" data-studio="${studio.name}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 </div>
             `, {
                 offset: [0, -15],
@@ -2814,8 +2949,9 @@ function addStudiosToMap(studios) {
             removeHighlight(studio.name, 'map');
         });
         
-        // Add event listener to the read more button
+        // ===== NUEVO: Event listeners para las tags de filtro en popups =====
         marker.on('popupopen', () => {
+            // Event listeners para los botones de leer más (existente)
             const readMoreBtn = document.querySelector(`.read-more-btn[data-studio="${studio.name}"]`);
             if (readMoreBtn) {
                 readMoreBtn.addEventListener('click', () => {
@@ -2823,7 +2959,26 @@ function addStudiosToMap(studios) {
                     map.closePopup();
                 });
             }
+            
+            // NUEVO: Event listeners para las tags de filtro
+            const filterTags = document.querySelectorAll('.pop-tag[data-filter]');
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const filterType = this.dataset.filter;
+                    const filterValue = this.dataset.value;
+                    
+                    applyFilterFromPopup(filterType, filterValue, this);
+                });
+                
+                // Marcar como activo si corresponde
+                const filterType = tag.dataset.filter;
+                if (activeFilters[filterType] === tag.dataset.value) {
+                    tag.classList.add('active');
+                }
+            });
         });
+        // ===== FIN NUEVO =====
 
         // Add click event to marker for inactivity reset
         marker.on('click', function() {
@@ -2848,6 +3003,7 @@ function addStudiosToMap(studios) {
     
     console.log(`${studios.length} estudios agregados al mapa`);
 }
+
 
 // Function to highlight a studio
 function highlightStudio(studioName, source) {
@@ -3258,10 +3414,10 @@ function renderStudiosList(studios) {
     
     let html = '';
     studios.forEach(studio => {
-        html += `
+    html += `
             <div class="studio-item" data-name="${studio.name}">
                 <div class="studio-info">
-                    <span class="studio-neighborhood" style="color: var(--primary-green); font-style: italic;">${studio.barrio} - </span>
+                    <span class="studio-neighborhood" style="color: var(--primary-green); font-style: italic;">${studio.barrio} - ${studio.styles.join(', ')}</span>
                     <span class="studio-name">${studio.name}</span>
                 </div>
                 <div class="studio-actions">
@@ -3275,7 +3431,6 @@ function renderStudiosList(studios) {
             </div>
         `;
     });
-    
     studiosListContainer.innerHTML = html;
     
     // Add event listeners to studio items
@@ -3348,6 +3503,16 @@ function applyFilters() {
         selectedFilters[category].push(value);
     });
     
+    // Actualizar activeFilters para un solo filtro (tomamos el primero de cada categoría)
+    activeFilters = {
+        barrio: selectedFilters.barrio.length > 0 ? selectedFilters.barrio[0] : null,
+        styles: selectedFilters.styles.length > 0 ? selectedFilters.styles[0] : null,
+        level: selectedFilters.level.length > 0 ? selectedFilters.level[0] : null
+    };
+    
+    // Actualizar tags en popups
+    updatePopupFilterTags();
+    
     // Filter studios
     const filteredStudios = studiosData.filter(studio => {
         return matchesFilters(studio, selectedFilters);
@@ -3366,23 +3531,46 @@ function applyFilters() {
     setTimeout(fixScrollbarIssue, 500);
 }
 
-// Function to reset filters
+// Función para actualizar tags en popups según activeFilters
+function updatePopupFilterTags() {
+    document.querySelectorAll('.pop-tag[data-filter]').forEach(tag => {
+        const filterType = tag.dataset.filter;
+        const filterValue = tag.dataset.value;
+        
+        if (activeFilters[filterType] === filterValue) {
+            tag.classList.add('active');
+        } else {
+            tag.classList.remove('active');
+        }
+    });
+}
+
+// También modificar la función resetFilters para limpiar los filtros activos
 function resetFilters() {
-    // Clear active classes
+    // Limpiar active filters
+    activeFilters = {
+        barrio: null,
+        styles: null,
+        level: null
+    };
+    
+    // Limpiar clases active en todos los popups
+    document.querySelectorAll('.pop-tag.active').forEach(tag => {
+        tag.classList.remove('active');
+    });
+    
+    // Código existente...
     document.querySelectorAll('.filter-option.active').forEach(option => {
         option.classList.remove('active');
     });
     
-    // Show all studios
+    // Mostrar todos los estudios
     addStudiosToMap(studiosData);
-    
-    // Render all studios
     renderStudiosList(studiosData);
     
     // Reset currently highlighted studio
     currentlyHighlightedStudio = null;
 }
-
 // Funcionalidad para la navegación móvil
 function initializeMobileNavigation() {
     const mobileNavMap = document.getElementById('mobile-nav-map');
@@ -4077,3 +4265,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
