@@ -341,7 +341,6 @@ footer:hover::after {
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: hidden;
     transition: height 0.3s ease;
 }
 
@@ -694,7 +693,7 @@ footer:hover::after {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 95dvh;
     height: 100%;
     background-color: var(--primary);
     z-index: 1000;
@@ -710,6 +709,8 @@ footer:hover::after {
     scrollbar-width: thin;
     scrollbar-color: var(--primary-green) var(--primary);
 }
+
+
 
 .studio-detail.active {
     transform: translateX(0);
@@ -964,7 +965,7 @@ footer:hover::after {
     align-items: center;
     gap: 0.8rem;
     transition: color 0.3s ease;
-    padding-left: 0.8rem;
+    padding: 0.4rem;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: 500;
@@ -1020,6 +1021,7 @@ footer:hover::after {
     padding: 1rem 0;
     margin-bottom: 1rem;
     border-bottom: 1px solid #e0e0e0;
+
 }
 
 .day-header {
@@ -1040,9 +1042,11 @@ footer:hover::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     font-family: 'Montserrat', sans-serif;
 }
+
+
 
 .class-time {
     font-weight: 600;
@@ -1079,6 +1083,13 @@ footer:hover::after {
     font-size: 0.9rem;
     font-style: italic;
 }
+
+.schedule-class:hover {
+    color: var(--accent);
+    background-color: rgba(82, 102, 80, 0.1);
+    border-radius: 5px;
+}
+
 
 /* Estilos para el marcador junto al nombre */
 .studio-title-with-marker {
@@ -1632,9 +1643,6 @@ footer:hover::after {
     font-weight: 400;
 }
 
-.contact-link:hover {
-    color: var(--accent);
-}
 
 
 /* ===== FLASH LOADING SCREEN ===== */
@@ -1790,7 +1798,7 @@ footer:hover::after {
     }
     
     .yoga-main-section {
-        height: 100dvh;
+        height: 95dvh;
         margin-top: 50px;
     }
     
@@ -1886,6 +1894,7 @@ footer:hover::after {
     .social-icons .social-icon {
         display: inline-block;
     }
+
 }
 
 @media (max-width: 1000px) {
@@ -1894,7 +1903,7 @@ footer:hover::after {
     }
     
     .yoga-section {
-        height: calc(100vh - 160px) !important;
+        height: calc(90dvh - 100px) !important;
         margin-bottom: 50px;
         flex-direction: column;
     }
@@ -1931,6 +1940,7 @@ footer:hover::after {
     
     .studio-detail {
         width: 100%;
+        height: 85dvh;
     }
     
     .mobile-nav-bottom {
@@ -1962,7 +1972,7 @@ footer:hover::after {
     }
     
     .yoga-section {
-        height: calc(100vh - 160px);
+        height: calc(90dvh - 100px);
         margin-bottom: 50px;
     }
     
@@ -1989,7 +1999,7 @@ footer:hover::after {
     
     .yoga-section.show-studios .filter-panel {
         display: flex;
-        height: 100vh !important;
+        height: 90dvh !important;
     }
     
     .yoga-section.show-filters #map-container {
@@ -1998,7 +2008,7 @@ footer:hover::after {
     
     .yoga-section.show-filters .filter-panel {
         display: flex;
-        height: 100vh !important;
+        height: 90dvh !important;
     }
     
     .yoga-section.show-filters .studios-list-section {
@@ -2305,6 +2315,8 @@ input[type="text"], input[type="search"], textarea {
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+
 </style>
 
 </head>
@@ -2388,7 +2400,7 @@ input[type="text"], input[type="search"], textarea {
         </div>
 
         <div class="yoga-section">
-            <button class="expand-button" id="expand-button">
+            <button class="expand-button" style= "visibility: hidden;" id="expand-button">
                 <i class="fas fa-expand"></i>
             </button>
             
@@ -3125,6 +3137,8 @@ function showStudioDetail(studio) {
         <h2>Sobre el Estudio</h2>
 
         <div class="about-section">
+                        <p class="description-text">${studio.description}</p>
+
             <h3>
                 ${studio.instagram ? `
                     <a href="https://instagram.com/${studio.instagram.replace('@', '')}" target="_blank" class="contact-link">
@@ -3158,12 +3172,6 @@ function showStudioDetail(studio) {
                     </div>
                 </h3>
             ` : ''}
-        </div>
-
-        <!-- Descripción -->
-        <h2>Descripción del Estudio</h2>
-        <div class="detail-section" style="padding:0rem !important">
-            <p class="description-text">${studio.description}</p>
         </div>
 
         <!-- Fotos -->
