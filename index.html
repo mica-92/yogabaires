@@ -12,24 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
+
 /* ===== VARIABLES Y ESTILOS GLOBALES ===== */
-@font-face {
-    font-family: 'Calps';
-    src: url('calps-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-
-.leaflet-container a.leaflet-popup-close-button {
-margin: 1rem;
-}
-
-.leaflet-container a.leaflet-popup-close-button:hover {
-color: var(--accent);
-}
-
 :root {
     --primary: #f5f2eaff;
     --primary-green: #526650ff;
@@ -39,6 +23,14 @@ color: var(--accent);
     --accent: #8c5648ff;
     --background: #f4f2e9ff;
     --background-alt: #f5f5f5;
+}
+
+@font-face {
+    font-family: 'Calps';
+    src: url('calps-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 * {
@@ -51,6 +43,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     background-color: var(--primary);
+    cursor: default;
 }
 
 /* ===== NAV BAR STYLES ===== */
@@ -105,6 +98,7 @@ body {
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .nav-link:hover {
@@ -167,6 +161,7 @@ body {
     font-size: 24px;
     color: var(--primary);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .social-icon:hover {
@@ -243,6 +238,7 @@ body {
     display: block;
     width: auto;
     text-align: center;
+    cursor: pointer;
 }
 
 .mobile-menu-link::after {
@@ -334,7 +330,6 @@ footer:hover::after {
 /* ===== MAPA Y FILTROS ===== */
 .yoga-main-section {
     width: 100%;
-    height: calc(100dvh - 85px) !important;
     display: flex;
     flex-direction: column;
     margin-top: 50px;
@@ -357,6 +352,10 @@ footer:hover::after {
     position: relative;
     flex-shrink: 0;
     order: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+    background-color: var(--primary) !important;
 }
 
 .filter-panel {
@@ -372,6 +371,9 @@ footer:hover::after {
     overflow: hidden;
     height: 100%;
     min-height: 300px;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 0;
 }
 
 .expand-button {
@@ -436,6 +438,7 @@ footer:hover::after {
     font-size: 0.9rem;
     background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
+    cursor: text;
 }
 
 .search-input:focus, .search-input:hover {
@@ -494,30 +497,37 @@ footer:hover::after {
     color: white;
 }
 
-
-/* ===== FILTER BUTTONS LAYOUT ===== */
 .filter-buttons {
     display: flex;
-    gap: 1rem;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
-    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
 }
 
 .filter-buttons button {
     padding: 0.7rem 1.5rem;
-    border: 1px solid #333;
+    border: 1px solid var(--primary-green);
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
+    width: 45%;
+    margin: 0.5rem;
     font-size: 0.9rem;
-    flex: 1;
     transition: all 0.3s ease;
-    width: 50%;
 }
 
 .apply-btn {
+    background-color: var(--primary);
+    color: var(--primary-green);
+}
+
+.apply-btn:hover {
+    background-color: var(--primary-green);
+    color: var(--primary);
+    border: 2px solid var(--primary-green) !important;
+}
+
+.apply-btn:active {
     background-color: var(--primary-green);
     color: var(--primary);
     border: 2px solid var(--primary-green) !important;
@@ -528,18 +538,6 @@ footer:hover::after {
     color: var(--primary);
     border: 2px solid var(--primary-green) !important;
 }
-.apply-btn:hover {
-    background-color: var(--primary-red);
-    color: var(--primary);
-    border-color: var(--primary-red) !important;
-}
-
-.apply-btn:active {
-    background-color: color-mix(in srgb, var(--primary-green) 80%, transparent);
-    color: var(--primary);
-    border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
-}
-
 
 .reset-btn:hover {
     background-color: var(--primary-red);
@@ -551,6 +549,12 @@ footer:hover::after {
     background-color: color-mix(in srgb, var(--primary-green) 80%, transparent);
     color: var(--primary);
     border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
+}
+
+.filter-container {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 150px;
 }
 
 /* ===== LISTA DE ESTUDIOS ===== */
@@ -565,7 +569,7 @@ footer:hover::after {
 .studios-list-section h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--primary-green);
     font-weight: 500;
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--primary-dark);
@@ -577,22 +581,24 @@ footer:hover::after {
     flex: 1;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-green) var(--background);
+    overflow-y: auto;
 }
 
 .studios-list-container::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
 }
 
 .studios-list-container::-webkit-scrollbar-track {
     background: var(--background);
-    border-radius: 4px;
-    padding-left: 1rem;
+    border-radius: 8px;
+    margin: 4px;
+    border: 1px solid var(--primary-green);
 }
 
 .studios-list-container::-webkit-scrollbar-thumb {
     background-color: var(--primary-green);
-    border-radius: 4px;
-    border: 2px solid var(--background);
+    border-radius: 8px;
+    border: 3px solid var(--background);
 }
 
 .studios-list-container::-webkit-scrollbar-thumb:hover {
@@ -701,11 +707,32 @@ footer:hover::after {
     flex-direction: column;
     min-height: 0;
     border-right: 2px solid var(--primary-dark);
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) var(--primary);
 }
 
 .studio-detail.active {
     transform: translateX(0);
     display: flex;
+}
+
+.studio-detail::-webkit-scrollbar {
+    width: 6px;
+}
+
+.studio-detail::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.studio-detail::-webkit-scrollbar-thumb {
+    background-color: var(--primary-green);
+    border-radius: 3px;
+    border: 1px solid var(--primary);
+}
+
+.studio-detail::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
 }
 
 .close-detail {
@@ -733,56 +760,107 @@ footer:hover::after {
 }
 
 .studio-detail h2 {
-    font-size: 2rem;
+    font-size: 40px;
     margin-bottom: 1rem;
-    color: var(--primary-dark);
+    color: var(--primary-green);
     font-weight: 500;
-    padding: 0.5rem 0;
     font-family: 'Calps', sans-serif;
     border-bottom: 2px solid var(--primary-green);
-}
-
-.share-section {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--primary-dark);
 }
 
 .share-section h2 {
     margin: 0;
     color: var(--primary-dark);
-    font-size: 2rem;
     font-weight: 500;
     font-family: 'Calps', sans-serif;
     border-bottom: none;
+}
+
+/* ===== DETALLE DE ESTUDIO - SHARE SECTION UPDATED ===== */
+.share-section {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+.studio-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: nowrap;
+    min-height: 40px;
+}
+
+.studio-marker-container {
+    flex-shrink: 0;
+}
+
+.studio-marker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    aspect-ratio: 1 / 1;
+}
+
+.studio-title {
+    margin: 0;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 500;
+    font-family: 'Calps', sans-serif;
+    flex: 1;
+    min-width: 0;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
+.share-section-bottom {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: nowrap;
+}
+
+.share-label {
+    color: var(--primary-green);
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .share-buttons {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .share-btn {
-    text-decoration: none;
+    background: none;
+    border: none;
+    color: var(--primary-green);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-green);
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 1.1rem;
 }
 
 .share-btn:hover {
-    background-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
 }
 
 .tag-list {
@@ -841,6 +919,16 @@ footer:hover::after {
     overflow: hidden;
 }
 
+.about-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0rem 0rem 2rem 0rem;
+    line-height: 2rem;
+}
+
 .detail-section h3 {
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
@@ -880,6 +968,7 @@ footer:hover::after {
     border-radius: 5px;
     font-size: 1rem;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .contact-link:hover {
@@ -889,23 +978,13 @@ footer:hover::after {
 
 .description-text {
     color: var(--primary-dark);
-    line-height: 1.6;
-    font-size: 1rem;
+    line-height: 1.6rem;
     margin: 0;
-    padding: 1rem;
+    padding: 1rem 0rem 2rem 0rem;
 }
 
 .schedule-section {
     margin-top: 1rem;
-}
-
-.schedule-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-dark);
-    font-weight: 500;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-green);
 }
 
 .schedule-container {
@@ -913,6 +992,27 @@ footer:hover::after {
     margin-top: 0.5rem;
     flex: 1;
     min-height: 150px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) var(--background);
+}
+
+.schedule-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.schedule-container::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: 3px;
+}
+
+.schedule-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-green);
+    border-radius: 3px;
+    border: 1px solid var(--background);
+}
+
+.schedule-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
 }
 
 .schedule-day {
@@ -980,6 +1080,86 @@ footer:hover::after {
     font-style: italic;
 }
 
+/* Estilos para el marcador junto al nombre */
+.studio-title-with-marker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Estilos para el carrusel de fotos */
+.photos-section {
+    margin: 1rem 0 2rem 0;
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.carousel-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.carousel-btn:hover {
+    background-color: var(--accent);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
 /* ===== POPUPS Y OVERLAYS ===== */
 .studio-popup-wrapper .leaflet-popup-content {
     margin: 0;
@@ -996,11 +1176,7 @@ footer:hover::after {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-green);    font-family: 'Calps', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: var(--primary-green) solid 2px;
+    border-bottom: 2px solid var(--primary-green);
 }
 
 .studio-popup p {
@@ -1038,9 +1214,6 @@ footer:hover::after {
     border: none;
     color: white;
     font-weight: 500;
-}
-
-.pop-tag {
     background-color: white;
     border: 1px solid var(--primary-dark);
     color: var(--primary-green);
@@ -1190,6 +1363,15 @@ footer:hover::after {
     font-weight: 600;
 }
 
+.leaflet-container a.leaflet-popup-close-button {
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: var(--accent);
+}
+
 .custom-marker div {
     background-color: var(--primary-green);
     border: 2px solid var(--primary);
@@ -1336,7 +1518,7 @@ footer:hover::after {
 }
 
 .mobile-nav-btn.active {
-    color: var(--primary-green);
+    color: var(--primary);
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -1344,7 +1526,212 @@ footer:hover::after {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* ===== ESTILOS PARA RESEÑAS ===== */
+.reviews-section {
+    margin: 1rem 0 2rem 0;
+}
 
+.review-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(82, 102, 80, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-green);
+}
+
+.review-content {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.review-icon {
+    color: var(--primary-green);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.review-text-wrapper {
+    flex: 1;
+}
+
+.review-text {
+    color: var(--primary-dark);
+    font-style: italic;
+    line-height: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    text-align: left;
+}
+
+.review-author {
+    color: var(--primary-green);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: left;
+    display: block;
+}
+
+.no-reviews {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(82, 102, 80, 0.05);
+    border-radius: 8px;
+    border: 1px dashed var(--primary-green);
+}
+
+.no-reviews p {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5rem;
+}
+
+.no-reviews a {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.no-reviews a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* ===== ESTILOS CORREGIDOS PARA ELEMENTOS DE CONTACTO ===== */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    padding-left: 0;
+}
+
+.contact-bullet {
+    color: var(--primary-green);
+    font-size: 1rem;
+    line-height: 1.6rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.contact-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.contact-value {
+    color: var(--primary-dark);
+    font-weight: 400;
+}
+
+.contact-link:hover {
+    color: var(--accent);
+}
+
+
+/* ===== FLASH LOADING SCREEN ===== */
+.flash-loading {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100dvh - 20px);
+    background-color: var(--primary);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: flashFade 1.2s ease-in-out forwards;
+}
+
+.flash-loading-content {
+    color: var(--primary);
+    font-family: 'Calps', sans-serif;
+    font-size: 8rem;
+    text-align: center;
+    font-weight: 900;
+    animation: contentFade 1.2s ease-in-out forwards;
+}
+
+.flash-loading-content img {
+    max-width: 200px;
+    height: auto;
+    animation: logoPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes flashFade {
+    0% { 
+        opacity: 1; 
+        background-color: var(--primary);
+    }
+    70% { 
+        opacity: 1; 
+        background-color: var(--primary);
+    }
+    100% { 
+        opacity: 0; 
+        visibility: hidden;
+        background-color: transparent;
+    }
+}
+
+@keyframes contentFade {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.8) rotate(0deg);
+    }
+    30% { 
+        opacity: 1; 
+        transform: scale(1) rotate(5deg);
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1) rotate(-5deg);
+    }
+    70% { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg);
+    }
+    100% { 
+        opacity: 0; 
+        transform: scale(1.1) rotate(0deg);
+    }
+}
+
+@keyframes logoPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Asegurar que el mapa sea visible detrás del loading */
+#map-container {
+    position: relative;
+    z-index: 1;
+}
+
+.flash-loading {
+    z-index: 10000;
+}
+
+/* ===== ESTILOS PARA EL TÍTULO DE LA LISTA DE ESTUDIOS ===== */
+.studios-list-title {
+    font-size: 3rem;
+    color: var(--primary-green);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--primary-green) solid 2px;
+    font-family: 'Calps', sans-serif;
+}
 
 /* ===== MEDIA QUERIES ===== */
 
@@ -1403,7 +1790,7 @@ footer:hover::after {
     }
     
     .yoga-main-section {
-        height: calc(100dvh - 80px) !important;
+        height: 100dvh;
         margin-top: 50px;
     }
     
@@ -1450,6 +1837,39 @@ footer:hover::after {
     
     .filter-panel:not(.showing-filters) .filter-section {
         display: none !important;
+    }
+    
+    /* Reset for mobile classes on desktop */
+    .yoga-section {
+        flex-direction: row !important;
+    }
+    
+    #map-container {
+        width: 60% !important;
+        height: 100% !important;
+        display: block !important;
+    }
+    
+    .filter-panel {
+        width: 40% !important;
+        height: 100% !important;
+        display: flex !important;
+    }
+    
+    .studios-list-section {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .filter-section {
+        visibility: visible !important;
+    }
+    
+    /* Remove any mobile-specific hiding */
+    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) #map-container,
+    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) .filter-panel {
+        display: flex !important;
+        visibility: visible !important;
     }
 }
 
@@ -1569,6 +1989,7 @@ footer:hover::after {
     
     .yoga-section.show-studios .filter-panel {
         display: flex;
+        height: 100vh !important;
     }
     
     .yoga-section.show-filters #map-container {
@@ -1577,6 +1998,7 @@ footer:hover::after {
     
     .yoga-section.show-filters .filter-panel {
         display: flex;
+        height: 100vh !important;
     }
     
     .yoga-section.show-filters .studios-list-section {
@@ -1637,239 +2059,8 @@ footer:hover::after {
     .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) .filter-panel {
         display: none;
     }
-}
-
-@media (max-width: 768px) {
-    .slogan {
-        display: none;
-    }
     
-    .social-icon {
-        font-size: 18px;
-    }
-    
-    .logo-link {
-        height: 25px;
-    }
-    
-    .right-logo {
-        max-height: 25px;
-    }
-    
-    .nav-content {
-        margin: 0 1rem;
-    }
-    
-    .mobile-menu-content {
-        gap: 1rem;
-        padding: 2rem;
-    }
-    
-    .mobile-menu-link {
-        font-size: 0.9rem;
-        padding: 0.8rem 0;
-    }
-    
-    .map-title-container img {
-        max-height: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    .map-title-container {
-        height: 8vh;
-        min-height: 60px;
-        padding: 0 5px;
-    }
-    
-    .map-title-container img {
-        max-height: 40px !important;
-        max-width: 90%;
-    }
-}
-
-/* Estados expandidos */
-.yoga-section.expanded {
-    height: 100vh !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10000;
-}
-
-.yoga-section.expanded #map-container {
-    height: 40vh;
-}
-
-.yoga-section.expanded .filter-panel {
-    height: 60vh;
-}
-
-/* Estilos para el título de la lista de estudios */
-.studios-list-title {
-    font-size: 3rem;
-    color: var(--primary-green);
-    font-weight: 900;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: var(--primary-green) solid 2px;
-    font-family: 'Calps', sans-serif;
-}
-
-/* Ocultar elementos antiguos que ya no se usan */
-.toggle-button, 
-#filter-toggle, 
-#studios-toggle, 
-.toggle-content {
-    display: none !important;
-}
-
-/* ===== SOLUCIÓN DEFINITIVA SCROLLBAR PANTALLAS INTERMEDIAS ===== */
-@media (max-width: 1000px) and (min-width: 769px) {
-
-    
-    /* Forzar scrollbar siempre visible */
-    .studios-list-container {
-        scrollbar-width: auto;
-        scrollbar-color: var(--primary-green) var(--background);
-    }
-    
-    .studios-list-container::-webkit-scrollbar {
-        width: 12px;
-        display: block !important;
-    }
-    
-    .studios-list-container::-webkit-scrollbar-track {
-        background: var(--background);
-        border-radius: 8px;
-        margin: 4px;
-        border: 1px solid var(--primary-green);
-    }
-    
-    .studios-list-container::-webkit-scrollbar-thumb {
-        background-color: var(--primary-green);
-        border-radius: 8px;
-        border: 3px solid var(--background);
-    }
-    
-    .studios-list-container::-webkit-scrollbar-thumb:hover {
-        background-color: var(--accent);
-    }
-    
-    /* Asegurar que haya suficiente contenido para scroll */
-    .studios-list-container::after {
-        content: '';
-        display: block;
-        height: 1px;
-        opacity: 0;
-    }
-}
-
-/* SCROLLBAR GLOBAL MEJORADA */
-.studios-list-container {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-green) var(--background);
-    overflow-y: auto;
-}
-
-.studios-list-container::-webkit-scrollbar {
-    width: 12px;
-}
-
-.studios-list-container::-webkit-scrollbar-track {
-    background: var(--background);
-    border-radius: 8px;
-    margin: 4px;
-    border: 1px solid var(--primary-green);
-}
-
-.studios-list-container::-webkit-scrollbar-thumb {
-    background-color: var(--primary-green);
-    border-radius: 8px;
-    border: 3px solid var(--background);
-}
-
-.studios-list-container::-webkit-scrollbar-thumb:hover {
-    background-color: var(--accent);
-}
-
-/* Estructura base mejorada */
-.filter-panel {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-}
-
-.studios-list-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    overflow: hidden;
-}
-
-.studios-list-container {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.filter-container{
-    flex: 1;
-    overflow-y: auto;
-    min-height: 150px;
-}
-
-
-/* ESTILOS CRÍTICOS PARA REPARAR EL LAYOUT */
-#map-container {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: block !important;
-    background-color: var(--primary) !important;
-}
-
-.filter-panel {
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-/* Reset for mobile classes on desktop */
-@media (min-width: 1001px) {
-    .yoga-section {
-        flex-direction: row !important;
-    }
-    
-    #map-container {
-        width: 60% !important;
-        height: 100% !important;
-        display: block !important;
-    }
-    
-    .filter-panel {
-        width: 40% !important;
-        height: 100% !important;
-        display: flex !important;
-    }
-    
-    .studios-list-section {
-        display: flex !important;
-        visibility: visible !important;
-    }
-    
-    .filter-section {
-        visibility: visible !important;
-    }
-    
-    /* Remove any mobile-specific hiding */
-    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) #map-container,
-    .yoga-section:not(.show-map):not(.show-studios):not(.show-filters) .filter-panel {
-        display: flex !important;
-        visibility: visible !important;
-    }
-}
-
-/* Mobile styles */
-@media (max-width: 1000px) {
+    /* Mobile styles */
     .yoga-section {
         flex-direction: column !important;
     }
@@ -1912,8 +2103,164 @@ footer:hover::after {
     }
 }
 
+@media (max-width: 768px) {
+    .slogan {
+        display: none;
+    }
+    
+    .social-icon {
+        font-size: 18px;
+    }
+    
+    .logo-link {
+        height: 25px;
+    }
+    
+    .right-logo {
+        max-height: 25px;
+    }
+    
+    .nav-content {
+        margin: 0 1rem;
+    }
+    
+    .mobile-menu-content {
+        gap: 1rem;
+        padding: 2rem;
+    }
+    
+    .mobile-menu-link {
+        font-size: 0.9rem;
+        padding: 0.8rem 0;
+    }
+    
+    .map-title-container img {
+        max-height: 50px;
+    }
+    
+    .carousel {
+        height: 300px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .studio-header {
+        flex-wrap: wrap;
+    }
+    
+    .studio-title {
+        font-size: 1.8rem;
+    }
+    
+    .share-section-bottom {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-title-container {
+        height: 8vh;
+        min-height: 60px;
+        padding: 0 5px;
+    }
+    
+    .map-title-container img {
+        max-height: 40px !important;
+        max-width: 90%;
+    }
+    
+    .studio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .share-section-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .share-buttons {
+        gap: 0.8rem;
+    }
+    
+    .share-btn {
+        font-size: 1.3rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Estados expandidos */
+.yoga-section.expanded {
+    height: 100vh !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+.yoga-section.expanded #map-container {
+    height: 40vh;
+}
+
+.yoga-section.expanded .filter-panel {
+    height: 60vh;
+}
+
+/* Ocultar elementos antiguos que ya no se usan */
+.toggle-button, 
+#filter-toggle, 
+#studios-toggle, 
+.toggle-content {
+    display: none !important;
+}
+
+/* ===== SOLUCIÓN DEFINITIVA SCROLLBAR PANTALLAS INTERMEDIAS ===== */
+@media (max-width: 1000px) and (min-width: 769px) {
+    /* Forzar scrollbar siempre visible */
+    .studios-list-container {
+        scrollbar-width: auto;
+        scrollbar-color: var(--primary-green) var(--background);
+    }
+    
+    .studios-list-container::-webkit-scrollbar {
+        width: 12px;
+        display: block !important;
+    }
+    
+    .studios-list-container::-webkit-scrollbar-track {
+        background: var(--background);
+        border-radius: 8px;
+        margin: 4px;
+        border: 1px solid var(--primary-green);
+    }
+    
+    .studios-list-container::-webkit-scrollbar-thumb {
+        background-color: var(--primary-green);
+        border-radius: 8px;
+        border: 3px solid var(--background);
+    }
+    
+    .studios-list-container::-webkit-scrollbar-thumb:hover {
+        background-color: var(--accent);
+    }
+    
+    /* Asegurar que haya suficiente contenido para scroll */
+    .studios-list-container::after {
+        content: '';
+        display: block;
+        height: 1px;
+        opacity: 0;
+    }
+}
+
 /* Remove text cursor from non-interactive elements */
-body, div, span, h1, h2, h3, h4, h5, h6, p, img, section, main, article, aside, header, footer {
+div, span, h1, h2, h3, h4, h5, h6, p, img, section, main, article, aside, header, footer {
     cursor: default;
 }
 
@@ -1929,44 +2276,6 @@ a, button, .filter-option, .studio-item, .read-more-btn, .instagram-btn,
 input[type="text"], input[type="search"], textarea {
     cursor: text;
 }
-
-
-/* Flash Loading Screen */
-.flash-loading {
-    position: fixed;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    height: calc(100dvh - 80px);
-    background-color:#c6d0db;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: flashFade 1.2s ease-in-out forwards;
-}
-
-.flash-loading-content {
-    color: var(--primary);
-    font-family: 'Calps', sans-serif;
-    font-size: 8rem;
-    text-align: center;
-    font-weight: 900;
-    animation: contentFade 1.2s ease-in-out forwards;
-}
-
-@keyframes flashFade {
-    0% { opacity: 1; }
-    70% { opacity: 1; }
-    100% { opacity: 1; visibility: hidden; }
-}
-
-@keyframes contentFade {
-    0% { opacity: 0; transform: scale(0.8); }
-    30% { opacity: 1; transform: scale(1); }
-    70% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.1); }
-}
 </style>
 
 </head>
@@ -1976,8 +2285,7 @@ input[type="text"], input[type="search"], textarea {
 <!-- Flash Loading Screen -->
 <div class="flash-loading" id="flashLoading">
     <div class="flash-loading-content">
-                <img src="path1013.png" alt="Yoga En Baires" class="hero-logo" id="hero-logo">
-                <img src="subtitulo.png" alt="Yoga En Baires Subtitle" class="hero-subtitle" id="hero-subtitle">
+                <img src="loto.png" alt="Yoga En Baires" class="hero-logo" id="hero-logo">
     </div>
 </div>
 
@@ -2057,7 +2365,6 @@ input[type="text"], input[type="search"], textarea {
             
             <!-- Map Container -->
             <div id="map-container">
-<div id="map-container"></div>
             </div>
 
             <!-- Filter Panel -->
@@ -2129,12 +2436,6 @@ input[type="text"], input[type="search"], textarea {
         </div>
     </div>
 
-<footer>
-    <div class="footer-content">
-        <i class="fa-solid fa-quote-left"></i> Lokāḥ Samastāḥ Sukhino Bhavantu <i class="fa-solid fa-quote-right"></i>
-    </div>
-</footer>
-
 
 
 
@@ -2142,7 +2443,38 @@ input[type="text"], input[type="search"], textarea {
 
 <script>
 
- const studiosData = [
+// Variable global para almacenar los datos
+let studiosData = [];
+
+// Función para cargar datos desde el JSON
+async function loadStudiosData() {
+    try {
+        console.log('🔄 Cargando datos desde studios.json...');
+        
+        const response = await fetch('studios.json');
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        
+        studiosData = await response.json();
+        console.log(`✅ ${studiosData.length} estudios cargados exitosamente`);
+        
+        return studiosData;
+        
+    } catch (error) {
+        console.error('❌ Error cargando studios.json:', error);
+        
+        // Datos de respaldo en caso de error
+        studiosData = getFallbackData();
+        console.log('🔄 Usando datos de respaldo...');
+        return studiosData;
+    }
+}
+
+// Datos de respaldo (solo unos pocos estudios básicos)
+function getFallbackData() {
+    return [
 
     {
         "name": "Estudio Dharma",
@@ -2158,6 +2490,8 @@ input[type="text"], input[type="search"], textarea {
         "address": "Av. Rivadavia 1234, Caballito",
         "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga.",
         "instagram": "@dharma",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Lunes",
@@ -2190,6 +2524,8 @@ input[type="text"], input[type="search"], textarea {
         "address": "Thames 2345, Palermo",
         "description": "Estudio moderno especializado en prácticas dinámicas. Contamos con sala climatizada para hot yoga y profesores certificados internacionalmente.",
         "instagram": "@yogapalermo",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Lunes",
@@ -2215,6 +2551,8 @@ input[type="text"], input[type="search"], textarea {
         "address": "Junín 1234, Recoleta",
         "description": "Espacio tranquilo enfocado en yoga terapéutico y meditación. Ideal para quienes buscan alivio del estrés y conexión interior.",
         "instagram": "@shantirecoleta",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Martes",
@@ -2240,6 +2578,8 @@ input[type="text"], input[type="search"], textarea {
         "address": "Florida 456, Microcentro",
         "description": "Estudio dinámico para practicantes que buscan desafío físico y mental. Clases intensivas que combinan fuerza y flexibilidad.",
         "instagram": "@bapoweryoga",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Miércoles",
@@ -2265,6 +2605,8 @@ input[type="text"], input[type="search"], textarea {
         "address": "Defensa 789, San Telmo",
         "description": "Especialistas en yoga Yin y prácticas restaurativas. Ambiente histórico con energía tranquila y relajante.",
         "instagram": "@yinsantelmo",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Jueves",
@@ -2275,385 +2617,30 @@ input[type="text"], input[type="search"], textarea {
                 ]
             }
         ]
-    },
-    {
-        "name": "Alma Yoga Belgrano",
-        "logo": "arbol",
-        "lat": -34.5627,
-        "lng": -58.4559,
-        "styles": ["Hatha", "Vinyasa", "Kundalini"],
-        "level": ["Beginner", "Intermediate"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Showers", "Garden", "Library"],
-        "website": "https://almayoga.com.ar",
-        "barrio": "belgrano",
-        "address": "Juramento 2345, Belgrano",
-        "description": "Casa remodelada con jardín interior donde practicar yoga en conexión con la naturaleza. Enfoque holístico del bienestar.",
-        "instagram": "@almayoga",
-        "schedule": [
-            {
-                "day": "Viernes",
-                "classes": [
-                    { "time": "08:00", "name": "Hatha Matutino" },
-                    { "time": "11:00", "name": "Kundalini" },
-                    { "time": "18:00", "name": "Vinyasa Flow" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Urban Flow",
-        "logo": "ola",
-        "lat": -34.5955,
-        "lng": -58.4316,
-        "styles": ["Vinyasa", "Rocket", "AcroYoga"],
-        "level": ["Intermediate", "Advanced"],
-        "intensity": "Alta",
-        "amenities": ["Mats", "Showers", "AcroYoga Equipment"],
-        "website": "https://urbanflow.com.ar",
-        "barrio": "villa crespo",
-        "address": "Gurruchaga 1234, Villa Crespo",
-        "description": "Comunidad joven y dinámica especializada en prácticas desafiantes. Ofrecemos workshops regulares de acroyoga y arm balances.",
-        "instagram": "@urbanflow",
-        "schedule": [
-            {
-                "day": "Sábado",
-                "classes": [
-                    { "time": "09:00", "name": "Rocket Yoga" },
-                    { "time": "11:00", "name": "AcroYoga" },
-                    { "time": "16:00", "name": "Advanced Vinyasa" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga Nidra Studio",
-        "logo": "nube",
-        "lat": -34.6089,
-        "lng": -58.4375,
-        "styles": ["Yoga Nidra", "Restorative", "Meditation"],
-        "level": ["All Levels"],
-        "intensity": "Suave",
-        "amenities": ["Mats", "Bolsters", "Blankets", "Heating"],
-        "website": "https://yoganidraba.com.ar",
-        "barrio": "almagro",
-        "address": "Av. Corrientes 3456, Almagro",
-        "description": "Primer estudio especializado en Yoga Nidra de Buenos Aires. Ambiente cálido y oscuro ideal para la relajación profunda.",
-        "instagram": "@yoganidraba",
-        "schedule": [
-            {
-                "day": "Domingo",
-                "classes": [
-                    { "time": "10:00", "name": "Yoga Nidra" },
-                    { "time": "17:00", "name": "Restaurativo" },
-                    { "time": "20:00", "name": "Nidra Nocturno" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Ashtanga Traditional",
-        "logo": "serpiente",
-        "lat": -34.5753,
-        "lng": -58.4402,
-        "styles": ["Ashtanga", "Mysore"],
-        "level": ["All Levels"],
-        "intensity": "Alta",
-        "amenities": ["Mats", "Showers", "Changing Rooms"],
-        "website": "https://ashtangatradicional.com.ar",
-        "barrio": "colegiales",
-        "address": "Conde 789, Colegiales",
-        "description": "Práctica tradicional de Ashtanga Yoga según las enseñanzas de Pattabhi Jois. Programa Mysore style todas las mañanas.",
-        "instagram": "@ashtangatrad",
-        "schedule": [
-            {
-                "day": "Lunes a Viernes",
-                "classes": [
-                    { "time": "06:00", "name": "Mysore Practice" },
-                    { "time": "18:00", "name": "Led Primary" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga & Pilates Nuñez",
-        "logo": "lotus-blanco",
-        "lat": -34.5478,
-        "lng": -58.4675,
-        "styles": ["Hatha", "Vinyasa", "Pilates"],
-        "level": ["Beginner", "Intermediate"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Pilates Equipment", "Showers"],
-        "website": "https://yogapilatesnunez.com",
-        "barrio": "nuñez",
-        "address": "Av. del Libertador 5678, Nuñez",
-        "description": "Centro integral que combina yoga y pilates para un trabajo completo de cuerpo y mente. Ideal para rehabilitación y fortalecimiento.",
-        "instagram": "@yogapilatesnunez",
-        "schedule": [
-            {
-                "day": "Lunes",
-                "classes": [
-                    { "time": "08:00", "name": "Hatha Yoga" },
-                    { "time": "10:00", "name": "Pilates Mat" },
-                    { "time": "17:00", "name": "Yoga Flow" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Medita Yoga",
-        "logo": "om",
-        "lat": -34.5991,
-        "lng": -58.4203,
-        "styles": ["Hatha", "Meditation", "Mindfulness"],
-        "level": ["Beginner", "All Levels"],
-        "intensity": "Suave",
-        "amenities": ["Mats", "Cushions", "Tea Corner"],
-        "website": "https://meditayoga.com.ar",
-        "barrio": "palermo",
-        "address": "Humboldt 1234, Palermo",
-        "description": "Enfoque en la meditación y mindfulness integrado con práctica de asanas. Espacio silencioso y contemplativo.",
-        "instagram": "@meditayoga",
-        "schedule": [
-            {
-                "day": "Martes",
-                "classes": [
-                    { "time": "09:00", "name": "Hatha & Meditación" },
-                    { "time": "16:00", "name": "Mindfulness Yoga" },
-                    { "time": "19:00", "name": "Meditación Grupal" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Aerial Yoga BA",
-        "logo": "hamaca",
-        "lat": -34.6105,
-        "lng": -58.4287,
-        "styles": ["Aerial Yoga", "Vinyasa"],
-        "level": ["All Levels"],
-        "intensity": "Moderada",
-        "amenities": ["Aerial Hammocks", "Mats", "Showers"],
-        "website": "https://aerialyogaba.com.ar",
-        "barrio": "villa crespo",
-        "address": "Av. Dorrego 2345, Villa Crespo",
-        "description": "Estudio especializado en yoga aéreo con hamacas. Mejora tu flexibilidad y fuerza mientras te diviertes volando.",
-        "instagram": "@aerialyogaba",
-        "schedule": [
-            {
-                "day": "Miércoles",
-                "classes": [
-                    { "time": "10:00", "name": "Aerial Beginners" },
-                    { "time": "16:00", "name": "Aerial Flow" },
-                    { "time": "18:00", "name": "Aerial Advanced" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga Para Embarazadas",
-        "logo": "flor",
-        "lat": -34.5889,
-        "lng": -58.4298,
-        "styles": ["Prenatal", "Postnatal", "Restorative"],
-        "level": ["Beginner"],
-        "intensity": "Suave",
-        "amenities": ["Mats", "Props", "Nursing Room"],
-        "website": "https://yogaembarazadas.com.ar",
-        "barrio": "palermo",
-        "address": "Malabia 1234, Palermo",
-        "description": "Espacio exclusivo para embarazadas y mamás recientes. Clases especializadas con profesores entrenados en yoga prenatal.",
-        "instagram": "@yogaembarazadas",
-        "schedule": [
-            {
-                "day": "Jueves",
-                "classes": [
-                    { "time": "11:00", "name": "Yoga Prenatal" },
-                    { "time": "16:00", "name": "Yoga Postnatal" },
-                    { "time": "18:00", "name": "Mamás y Bebés" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Hot Yoga Puerto Madero",
-        "logo": "sol-calido",
-        "lat": -34.6118,
-        "lng": -58.3627,
-        "styles": ["Hot Yoga", "Bikram", "Hot Vinyasa"],
-        "level": ["Intermediate", "Advanced"],
-        "intensity": "Alta",
-        "amenities": ["Mats", "Towels", "Showers", "Lockers"],
-        "website": "https://hotyogapm.com.ar",
-        "barrio": "puerto madero",
-        "address": "Alicia Moreau de Justo 1234, Puerto Madero",
-        "description": "Estudio de lujo con salas climatizadas a 40°C. Experiencia completa de hot yoga con todos los servicios premium.",
-        "instagram": "@hotyogapm",
-        "schedule": [
-            {
-                "day": "Viernes",
-                "classes": [
-                    { "time": "07:00", "name": "Hot Vinyasa" },
-                    { "time": "09:00", "name": "Bikram Method" },
-                    { "time": "18:00", "name": "Hot Power" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga Corporativo",
-        "logo": "edificio",
-        "lat": -34.6023,
-        "lng": -58.3745,
-        "styles": ["Hatha", "Chair Yoga", "Stretching"],
-        "level": ["Beginner"],
-        "intensity": "Suave",
-        "amenities": ["Mats", "Chairs", "Changing Rooms"],
-        "website": "https://yogacorporativo.com.ar",
-        "barrio": "retiro",
-        "address": "San Martín 1234, Retiro",
-        "description": "Especialistas en yoga para oficinas y empresas. Clases diseñadas para aliviar el estrés laboral y mejorar la postura.",
-        "instagram": "@yogacorporativo",
-        "schedule": [
-            {
-                "day": "Lunes a Viernes",
-                "classes": [
-                    { "time": "08:00", "name": "Yoga Matutino" },
-                    { "time": "13:00", "name": "Yoga en Silla" },
-                    { "time": "18:00", "name": "Desestrés Laboral" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Kundalini Rising",
-        "logo": "serpiente-energia",
-        "lat": -34.6245,
-        "lng": -58.4521,
-        "styles": ["Kundalini", "Meditation", "Breathwork"],
-        "level": ["All Levels"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Cushions", "White Clothing"],
-        "website": "https://kundalinirising.com.ar",
-        "barrio": "boedo",
-        "address": "Av. Boedo 2345, Boedo",
-        "description": "Comunidad dedicada a la práctica de Kundalini Yoga según las enseñanzas de Yogi Bhajan. Clases con mantras y meditación.",
-        "instagram": "@kundaliniba",
-        "schedule": [
-            {
-                "day": "Sábado",
-                "classes": [
-                    { "time": "08:00", "name": "Kundalini Sunrise" },
-                    { "time": "11:00", "name": "Breathwork" },
-                    { "time": "17:00", "name": "Kundalini Evening" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga Deportivo",
-        "logo": "atleta",
-        "lat": -34.5678,
-        "lng": -58.4456,
-        "styles": ["Power Yoga", "Stretching", "Mobility"],
-        "level": ["Intermediate", "Advanced"],
-        "intensity": "Alta",
-        "amenities": ["Mats", "Blocks", "Straps", "Showers"],
-        "website": "https://yogadeportivo.com.ar",
-        "barrio": "belgrano",
-        "address": "Blanco Encalada 1234, Belgrano",
-        "description": "Yoga aplicado al rendimiento deportivo. Mejora tu flexibilidad, movilidad y prevención de lesiones.",
-        "instagram": "@yogadeportivo",
-        "schedule": [
-            {
-                "day": "Domingo",
-                "classes": [
-                    { "time": "09:00", "name": "Yoga para Corredores" },
-                    { "time": "11:00", "name": "Movilidad Avanzada" },
-                    { "time": "16:00", "name": "Stretching Profundo" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga en Parque",
-        "logo": "arbol-naturaleza",
-        "lat": -34.5801,
-        "lng": -58.4223,
-        "styles": ["Hatha", "Vinyasa", "Meditation"],
-        "level": ["All Levels"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Outdoor Equipment"],
-        "website": "https://yogaenparque.com.ar",
-        "barrio": "palermo",
-        "address": "Parque 3 de Febrero, Palermo",
-        "description": "Clases al aire libre en el hermoso entorno del Rosedal. Conecta con la naturaleza mientras practicas yoga.",
-        "instagram": "@yogaenparque",
-        "schedule": [
-            {
-                "day": "Sábado y Domingo",
-                "classes": [
-                    { "time": "09:00", "name": "Hatha en Parque" },
-                    { "time": "11:00", "name": "Vinyasa Flow" },
-                    { "time": "17:00", "name": "Meditación al Atardecer" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga para Tercera Edad",
-        "logo": "sol-suave",
-        "lat": -34.6123,
-        "lng": -58.4389,
-        "styles": ["Chair Yoga", "Gentle Yoga", "Restorative"],
-        "level": ["Beginner", "Senior"],
-        "intensity": "Suave",
-        "amenities": ["Chairs", "Mats", "Props", "Accessibility"],
-        "website": "https://yogaterceraedad.com.ar",
-        "barrio": "almagro",
-        "address": "Av. Medrano 1234, Almagro",
-        "description": "Clases especializadas para adultos mayores. Enfoque en movilidad articular, equilibrio y bienestar general.",
-        "instagram": "@yogamayores",
-        "schedule": [
-            {
-                "day": "Lunes a Viernes",
-                "classes": [
-                    { "time": "10:00", "name": "Yoga en Silla" },
-                    { "time": "15:00", "name": "Yoga Suave" },
-                    { "time": "17:00", "name": "Movilidad Articular" }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Yoga Fusion",
-        "logo": "mandala-moderno",
-        "lat": -34.6045,
-        "lng": -58.3867,
-        "styles": ["Vinyasa", "Dance", "Pilates"],
-        "level": ["All Levels"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Mirrors", "Sound System", "Showers"],
-        "website": "https://yogafusion.com.ar",
-        "barrio": "recoleta",
-        "address": "Paraguay 1234, Recoleta",
-        "description": "Fusionamos yoga con danza y pilates para una experiencia única y creativa. Clases dinámicas con música inspiradora.",
-        "instagram": "@yogafusionba",
-        "schedule": [
-            {
-                "day": "Viernes",
-                "classes": [
-                    { "time": "09:00", "name": "Yoga Dance" },
-                    { "time": "16:00", "name": "Pilates Fusion" },
-                    { "time": "19:00", "name": "Vinyasa Creativo" }
-                ]
-            }
-        ]
     }
 ]
+}
 
+// MAP SCRIPT - VERSIÓN CORREGIDA PARA MÓVILES
+let map; // Declarar map globalmente
+
+// En la función initializeMap(), agregar centrado automático
+function initializeMap() {
+    console.log('Inicializando mapa...');
     
-    // Crear el mapa
+    const mapContainer = document.getElementById('map-container');
+    if (!mapContainer) {
+        console.error('Contenedor del mapa no encontrado');
+        return;
+    }
+    
+    // Forzar dimensiones visibles
+    mapContainer.style.display = 'block';
+    mapContainer.style.visibility = 'visible';
+    mapContainer.style.height = '100%';
+    mapContainer.style.width = '100%';
+    
+    // Crear el mapa con vista centrada en Buenos Aires
     map = L.map('map-container').setView([-34.6030, -58.3814], 13);
     
     // Add tile layer
@@ -2663,7 +2650,93 @@ input[type="text"], input[type="search"], textarea {
         maxZoom: 20
     }).addTo(map);
     
+    // Forzar redibujado inmediato del mapa
+    setTimeout(function() {
+        map.invalidateSize(true);
+        console.log('Mapa redibujado después de inicialización');
+        
+        // Centrar el mapa nuevamente para asegurar la posición correcta
+        map.setView([-34.6030, -58.3814], 13);
+    }, 100);
+    
+    return map;
+}
 
+// Modificar la función de inicialización para cargar el mapa durante el flash loading
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('🚀 DOM cargado, inicializando aplicación...');
+    
+    // Inicializar el mapa INMEDIATAMENTE durante el flash loading
+    initializeMap();
+    
+    // Configurar event listeners básicos
+    setupEventListeners();
+    
+    // CARGAR DATOS DESDE EL JSON
+    try {
+        await loadStudiosData();
+        console.log('✅ Datos cargados, inicializando UI...');
+        
+        // Inicializar UI con los datos cargados
+        initializeUI();
+        
+    } catch (error) {
+        console.error('❌ Error inicializando con datos JSON:', error);
+        // Inicializar con datos de respaldo
+        initializeUI();
+    }
+    
+    // Remover flash loading después de que todo esté listo
+    setTimeout(() => {
+        const flashLoading = document.getElementById('flashLoading');
+        if (flashLoading) {
+            flashLoading.style.opacity = '0';
+            setTimeout(() => {
+                flashLoading.remove();
+                // Asegurar que el mapa se redibuje correctamente después de remover el loading
+                if (map) {
+                    setTimeout(() => {
+                        map.invalidateSize(true);
+                        map.setView([-34.6030, -58.3814], 13);
+                    }, 100);
+                }
+            }, 300);
+        }
+    }, 1200); // Coincidir con la duración de la animación CSS
+});
+
+// En la función initializeUI(), asegurar que el mapa esté centrado
+function initializeUI() {
+    setTimeout(function() {
+        console.log('🎨 Inicializando UI con', studiosData.length, 'estudios...');
+        
+        // Renderizar lista de estudios
+        renderStudiosList(studiosData);
+        
+        // Poblar filtros
+        populateFilters();
+        
+        // Agregar estudios al mapa
+        addStudiosToMap(studiosData);
+        
+        // Configuración responsive
+        setupResponsiveLayout();
+        
+        // Inicializar botón de filtros en el header
+        initializeHeaderFilterButton();
+        
+        // Asegurar que el mapa esté centrado y visible
+        if (map) {
+            setTimeout(() => {
+                map.invalidateSize(true);
+                map.setView([-34.6030, -58.3814], 13);
+            }, 200);
+        }
+        
+        console.log('✅ Aplicación completamente inicializada');
+        
+    }, 500);
+}
 // Store markers with reference to their studio
 let markers = [];
 let studioMarkersMap = new Map();
@@ -2849,6 +2922,11 @@ function removeHighlight(studioName, source) {
 function showStudioDetail(studio) {
     const scheduleHTML = generateScheduleHTML(studio.schedule || getDefaultSchedule());
     
+    // Crear el HTML del carrusel de fotos
+    const photosHTML = studio.photos && studio.photos.length > 0 ? generatePhotosHTML(studio.photos) : '';
+        // Crear el HTML de las reseñas - ESTO FALTABA
+    const reviewsHTML = generateReviewsHTML(studio.reviews);
+    
     detailContent.innerHTML = `
         <div class="close-detail" id="close-detail" onclick="closeStudioDetail()">
             <i class="fas fa-times"></i>
@@ -2856,17 +2934,27 @@ function showStudioDetail(studio) {
         
         <!-- Sección Compartir -->
         <div class="share-section">
-            <h2>${studio.name}</h2>
-            <div class="share-buttons">
-                <button class="share-btn" onclick="shareStudio('${studio.name}', 'whatsapp')">
-                    <i class="fab fa-whatsapp"></i>
-                </button>
-                <button class="share-btn" onclick="shareStudio('${studio.name}', 'instagram')">
-                    <i class="fab fa-instagram"></i>
-                </button>
-                <button class="share-btn" onclick="shareStudio('${studio.name}', 'link')">
-                    <i class="fas fa-link"></i>
-                </button>
+            <div class="studio-header">
+                <div class="studio-marker-container">
+                    <div class="studio-marker" style="background-color: ${studio.logo}">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                </div>
+                <h2 class="studio-title">${studio.name}</h2>
+            </div>
+            <div class="share-section-bottom">
+                <span class="share-label">Compartir:</span>
+                <div class="share-buttons">
+                    <button class="share-btn" onclick="shareStudio('${studio.name}', 'whatsapp')">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                    <button class="share-btn" onclick="shareStudio('${studio.name}', 'instagram')">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+                    <button class="share-btn" onclick="shareStudio('${studio.name}', 'link')">
+                        <i class="fas fa-link"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -2878,9 +2966,9 @@ function showStudioDetail(studio) {
         </div>
 
         <!-- Información de Contacto -->
-            <h3>Sobre el Estudio</h3>
+        <h2>Sobre el Estudio</h2>
 
-        <div class="detail-section">
+        <div class="about-section">
             <h3>
                 ${studio.instagram ? `
                     <a href="https://instagram.com/${studio.instagram.replace('@', '')}" target="_blank" class="contact-link">
@@ -2917,15 +3005,20 @@ function showStudioDetail(studio) {
         </div>
 
         <!-- Descripción -->
-        <div class="detail-section">
-                        <h3>Descripción del Estudio</h3>
-
+        <h2>Descripción del Estudio</h2>
+        <div class="detail-section" style="padding:0rem !important">
             <p class="description-text">${studio.description}</p>
         </div>
 
+        <!-- Fotos -->
+        ${photosHTML}
+
+        <!-- Reseñas -->
+        ${reviewsHTML}
+
         <!-- Horarios -->
+        <h2>Horarios</h2>
         <div class="detail-section schedule-section">
-            <h3>Horarios</h3>
             <div class="schedule-container">
                 ${scheduleHTML}
             </div>
@@ -2934,6 +3027,88 @@ function showStudioDetail(studio) {
     
     studioDetail.classList.add('active');
 }
+
+
+// Función para generar el HTML de las reseñas
+function generateReviewsHTML(reviews) {
+    if (!reviews || reviews.length === 0) {
+        return `
+            <h2>Reseñas</h2>
+            <div class="reviews-section">
+                <div class="no-reviews">
+                    <p>Aún No Hay Reseñas de este estudio.</p>
+                    <p>Si querés contribuir envianos un mail a <a href="mailto:desenrollatumat@gmail.com">desenrollatumat@gmail.com</a></p>
+                </div>
+            </div>
+        `;
+    }
+
+    return `
+        <h2>Reseñas</h2>
+        <div class="reviews-section">
+            ${reviews.map(review => `
+                <div class="review-item">
+                    <div class="review-content">
+                        <i class="fas fa-quote-left review-icon"></i>
+                        <div class="review-text-wrapper">
+                            <p class="review-text">${review.review}</p>
+                            <span class="review-author">- ${review.author}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Función para generar el HTML del carrusel de fotos
+function generatePhotosHTML(photos) {
+    return `
+        <h2>Fotos</h2>
+        <div class="photos-section">
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel">
+                    ${photos.map((photo, index) => `
+                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                            <img src="assets/${photo}.png" alt="Foto del estudio ${index + 1}" onerror="this.src='assets/placeholder.png'">
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="carousel-btn next-btn" onclick="moveCarousel(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Función para mover el carrusel
+let currentPhotoIndex = 0;
+
+function moveCarousel(direction) {
+    const items = document.querySelectorAll('.carousel-item');
+    if (items.length === 0) return;
+    
+    // Remover clase activa del elemento actual
+    items[currentPhotoIndex].classList.remove('active');
+    
+    // Calcular nuevo índice
+    currentPhotoIndex += direction;
+    
+    // Asegurar que el índice esté dentro de los límites
+    if (currentPhotoIndex < 0) {
+        currentPhotoIndex = items.length - 1;
+    } else if (currentPhotoIndex >= items.length) {
+        currentPhotoIndex = 0;
+    }
+    
+    // Agregar clase activa al nuevo elemento
+    items[currentPhotoIndex].classList.add('active');
+}
+
 
 // Función para generar horarios
 function generateScheduleHTML(schedule) {
