@@ -1,7 +1,7 @@
 [
-    {
+     {
         "name": "Estudio Dharma",
-        "logo": "lotus-negro",
+        "logo": "var(--ashtanga)",
         "lat": -34.6190,
         "lng": -58.4414,
         "styles": ["Hatha", "Vinyasa", "Yin"],
@@ -13,6 +13,8 @@
         "address": "Av. Rivadavia 1234, Caballito",
         "description": "Estudio Dharma es un espacio dedicado to la práctica del yoga en sus diferentes estilos. Nuestro objetivo es brindar un ambiente cálido y acogedor donde cada persona pueda encontrar su propio camino en el yoga.",
         "instagram": "@dharma",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Lunes",
@@ -33,7 +35,7 @@
     },
     {
         "name": "Yoga Palermo",
-        "logo": "om-symbol",
+        "logo": "var(--hatha)",
         "lat": -34.5828,
         "lng": -58.4254,
         "styles": ["Vinyasa", "Ashtanga", "Hot Yoga"],
@@ -45,6 +47,8 @@
         "address": "Thames 2345, Palermo",
         "description": "Estudio moderno especializado en prácticas dinámicas. Contamos con sala climatizada para hot yoga y profesores certificados internacionalmente.",
         "instagram": "@yogapalermo",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Lunes",
@@ -58,7 +62,7 @@
     },
     {
         "name": "Shanti Yoga Recoleta",
-        "logo": "mandala",
+        "logo": "var(--yin)",
         "lat": -34.5895,
         "lng": -58.3934,
         "styles": ["Hatha", "Restorative", "Prenatal"],
@@ -70,6 +74,8 @@
         "address": "Junín 1234, Recoleta",
         "description": "Espacio tranquilo enfocado en yoga terapéutico y meditación. Ideal para quienes buscan alivio del estrés y conexión interior.",
         "instagram": "@shantirecoleta",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Martes",
@@ -83,7 +89,7 @@
     },
     {
         "name": "Buenos Aires Power Yoga",
-        "logo": "sol",
+        "logo": "var(--otros)",
         "lat": -34.6037,
         "lng": -58.3816,
         "styles": ["Power Yoga", "Vinyasa", "Core Yoga"],
@@ -95,6 +101,8 @@
         "address": "Florida 456, Microcentro",
         "description": "Estudio dinámico para practicantes que buscan desafío físico y mental. Clases intensivas que combinan fuerza y flexibilidad.",
         "instagram": "@bapoweryoga",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Miércoles",
@@ -108,7 +116,7 @@
     },
     {
         "name": "Yin San Telmo",
-        "logo": "luna",
+        "logo": "var(--vinyasa)",
         "lat": -34.6212,
         "lng": -58.3731,
         "styles": ["Yin Yoga", "Restorative", "Meditation"],
@@ -120,6 +128,8 @@
         "address": "Defensa 789, San Telmo",
         "description": "Especialistas en yoga Yin y prácticas restaurativas. Ambiente histórico con energía tranquila y relajante.",
         "instagram": "@yinsantelmo",
+        "photos": ["yoga12", "yoga1", "yoga2"],
+        "reviews": [{ "review": "texto", "author": "nombre" }],
         "schedule": [
             {
                 "day": "Jueves",
@@ -130,32 +140,7 @@
                 ]
             }
         ]
-    },
-    {
-        "name": "Alma Yoga Belgrano",
-        "logo": "arbol",
-        "lat": -34.5627,
-        "lng": -58.4559,
-        "styles": ["Hatha", "Vinyasa", "Kundalini"],
-        "level": ["Beginner", "Intermediate"],
-        "intensity": "Moderada",
-        "amenities": ["Mats", "Showers", "Garden", "Library"],
-        "website": "https://almayoga.com.ar",
-        "barrio": "belgrano",
-        "address": "Juramento 2345, Belgrano",
-        "description": "Casa remodelada con jardín interior donde practicar yoga en conexión con la naturaleza. Enfoque holístico del bienestar.",
-        "instagram": "@almayoga",
-        "schedule": [
-            {
-                "day": "Viernes",
-                "classes": [
-                    { "time": "08:00", "name": "Hatha Matutino" },
-                    { "time": "11:00", "name": "Kundalini" },
-                    { "time": "18:00", "name": "Vinyasa Flow" }
-                ]
-            }
-        ]
-    },
+    }
     {
         "name": "Urban Flow",
         "logo": "ola",
@@ -506,3 +491,4 @@
         ]
     }
 ]
+
