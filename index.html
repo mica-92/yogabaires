@@ -23,6 +23,12 @@
     --accent: #8c5648ff;
     --background: #f4f2e9ff;
     --background-alt: #f5f5f5;
+
+    --ashtanga: #626f7eff;
+    --vinyasa: #985355ff;
+    --yin: #423d3dff;
+    --otros: #728d6ff5;
+    --hatha: #ccc139ff;
 }
 
 @font-face {
@@ -500,24 +506,30 @@ footer:hover::after {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .filter-buttons button {
-    padding: 0.7rem 1.5rem;
+    padding: 0.7rem 1rem;
     border: 1px solid var(--primary-green);
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
-    width: 45%;
-    margin: 0.5rem;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
     font-size: 0.9rem;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .apply-btn {
     background-color: var(--primary);
     color: var(--primary-green);
+    flex-shrink: 1;
 }
 
 .apply-btn:hover {
@@ -536,6 +548,7 @@ footer:hover::after {
     background-color: var(--primary-green);
     color: var(--primary);
     border: 2px solid var(--primary-green) !important;
+    flex-shrink: 1;
 }
 
 .reset-btn:hover {
@@ -550,12 +563,28 @@ footer:hover::after {
     border-color: color-mix(in srgb, var(--primary-green) 80%, transparent) !important;
 }
 
-.filter-container {
-    flex: 1;
-    overflow-y: auto;
-    min-height: 150px;
+/* Asegurar que en móvil también estén lado a lado */
+@media (max-width: 1000px) {
+    .filter-buttons {
+        flex-direction: row !important;
+        gap: 0.5rem;
+    }
+    
+    .filter-buttons button {
+        width: auto;
+        flex: 1;
+        min-width: 120px;
+    }
 }
 
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .filter-buttons button {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        min-width: 110px;
+    }
+}
 /* ===== LISTA DE ESTUDIOS ===== */
 .studios-list-section {
     flex: 1;
@@ -664,7 +693,7 @@ footer:hover::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-green);
+    background-color: var(--primary-blue);
     font-family: 'Montserrat', sans-serif;
     color: white;
     border: none;
@@ -861,7 +890,8 @@ footer:hover::after {
 
 .share-btn:hover {
     color: var(--accent);
-    transform: translateY(-2px);
+    transform: scale(1.2);
+    transition: all 0.3s ease;
 }
 
 .tag-list {
@@ -883,33 +913,41 @@ footer:hover::after {
     border: none;
     color: white;
     transition: all 0.3s ease;
+    
 }
 
 .tag.style-tag {
     background-color: var(--accent);
+    border-color: var(--accent);
 }
 
 .tag.style-tag:hover {
-    background-color: #b35050;
-    transform: translateY(-2px);
+    background-color: #b3505061;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
 }
 
 .tag.level-tag {
     background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
 }
 
 .tag.level-tag:hover {
-    background-color: #1a252f;
-    transform: translateY(-2px);
+    background-color: #1a252f61;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+    
 }
 
 .tag.intensity-tag {
     background-color: var(--primary-green);
+    border-color: ar(--primary-green);
 }
 
 .tag.intensity-tag:hover {
-    background-color: #3d4d3a;
-    transform: translateY(-2px);
+    background-color: #3d4d3a61;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
 }
 
 .detail-section {
@@ -1375,13 +1413,26 @@ footer:hover::after {
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-    margin: 1rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    color: #333;
+    z-index: 1001;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .leaflet-container a.leaflet-popup-close-button:hover {
     color: var(--accent);
 }
+
 
 .custom-marker div {
     background-color: var(--primary-green);
@@ -2302,8 +2353,9 @@ input[type="text"], input[type="search"], textarea {
 }
 
 .pop-tag.pop-barrio-tag:hover {
-    background-color: #b35050;
-    transform: translateY(-2px);
+box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background-color: #b3505080;
+
 }
 
 .pop-tag[data-filter] {
@@ -2312,10 +2364,13 @@ input[type="text"], input[type="search"], textarea {
 }
 
 .pop-tag[data-filter]:hover {
-    transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+.tag{
+
+border: 1px solid var(--primary-green)
+}
 
 </style>
 
@@ -2326,7 +2381,7 @@ input[type="text"], input[type="search"], textarea {
 <!-- Flash Loading Screen -->
 <div class="flash-loading" id="flashLoading">
     <div class="flash-loading-content">
-                <img src="loto.png" alt="Yoga En Baires" class="hero-logo" id="hero-logo">
+        <img src="loto.png" alt="Yoga En Baires" class="hero-logo" id="hero-logo" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));">
     </div>
 </div>
 
@@ -2379,8 +2434,6 @@ input[type="text"], input[type="search"], textarea {
         <a href="#contacto" class="mobile-menu-link">sobre el proyecto</a>
     </div>
 </div>
-
-
 
     <!-- Map Section -->
     <div class="yoga-main-section">
@@ -2519,7 +2572,7 @@ function getFallbackData() {
 
     {
         "name": "Estudio Dharma",
-        "logo": "lotus-negro",
+        "logo": "var(--ashtanga)",
         "lat": -34.6190,
         "lng": -58.4414,
         "styles": ["Hatha", "Vinyasa", "Yin"],
@@ -2553,7 +2606,7 @@ function getFallbackData() {
     },
     {
         "name": "Yoga Palermo",
-        "logo": "om-symbol",
+        "logo": "var(--hatha)",
         "lat": -34.5828,
         "lng": -58.4254,
         "styles": ["Vinyasa", "Ashtanga", "Hot Yoga"],
@@ -2580,7 +2633,7 @@ function getFallbackData() {
     },
     {
         "name": "Shanti Yoga Recoleta",
-        "logo": "mandala",
+        "logo": "var(--yin)",
         "lat": -34.5895,
         "lng": -58.3934,
         "styles": ["Hatha", "Restorative", "Prenatal"],
@@ -2607,7 +2660,7 @@ function getFallbackData() {
     },
     {
         "name": "Buenos Aires Power Yoga",
-        "logo": "sol",
+        "logo": "var(--otros)",
         "lat": -34.6037,
         "lng": -58.3816,
         "styles": ["Power Yoga", "Vinyasa", "Core Yoga"],
@@ -2634,7 +2687,7 @@ function getFallbackData() {
     },
     {
         "name": "Yin San Telmo",
-        "logo": "luna",
+        "logo": "var(--vinyasa)",
         "lat": -34.6212,
         "lng": -58.3731,
         "styles": ["Yin Yoga", "Restorative", "Meditation"],
@@ -2912,7 +2965,7 @@ function addStudiosToMap(studios) {
         // Create custom icon
         const customIcon = L.divIcon({
             className: 'custom-marker',
-            html: `<div style="background-color: var(--primary-green); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"><i class="fas fa-spa"></i></div>`,
+            html: `<div style="background-color: ${studio.logo}; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"><i class="fas fa-spa"></i></div>`,
             iconSize: [30, 30],
             iconAnchor: [15, 15]
         });
@@ -2922,6 +2975,7 @@ function addStudiosToMap(studios) {
             .addTo(map)
             .bindPopup(`
                 <div class="studio-popup">
+
                     <h3>${studio.name}</h3>
                     <div class="tag-pop">
                         <div class="pop-tag-list">
@@ -3104,7 +3158,7 @@ function showStudioDetail(studio) {
         <div class="share-section">
             <div class="studio-header">
                 <div class="studio-marker-container">
-                    <div class="studio-marker" style="background-color: ${studio.logo}">
+                    <div class="studio-marker" style="background-color: ${studio.logo};">
                         <i class="fas fa-spa"></i>
                     </div>
                 </div>
@@ -4254,20 +4308,97 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// FOOTER SECTION JAVASCRIPT
+// ===== BLOCK UNWANTED INTERACTIONS =====
 document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.querySelector('footer');
-    
-    // Optional: Add smooth transition effects
-    footer.addEventListener('mouseenter', function() {
-        this.style.cursor = 'pointer';
+    // Prevent text selection
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
     });
     
-    footer.addEventListener('mouseleave', function() {
-        this.style.cursor = 'default';
+    // Prevent right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
     });
+    
+    // Prevent drag and drop
+    document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Prevent copy
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Prevent cut
+    document.addEventListener('cut', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Prevent paste
+    document.addEventListener('paste', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Add CSS to disable text selection globally
+    const style = document.createElement('style');
+    style.textContent = `
+        * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+        
+        /* Allow text selection only for inputs and textareas */
+        input[type="text"], 
+        input[type="search"], 
+        textarea {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+        
+        /* Allow text selection in search inputs */
+        .search-input,
+        .map-actions-container .search-input {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+    `;
+    document.head.appendChild(style);
 });
 
+// Additional protection for dynamic content
+function addProtectionToDynamicElements() {
+    // Re-apply protection when new elements are added dynamically
+    document.querySelectorAll('*').forEach(element => {
+        if (!element.matches('input[type="text"], input[type="search"], textarea, .search-input')) {
+            element.style.userSelect = 'none';
+            element.style.webkitUserSelect = 'none';
+            element.style.mozUserSelect = 'none';
+            element.style.msUserSelect = 'none';
+        }
+    });
+}
+
+// Call this function when new content is added dynamically
+setTimeout(addProtectionToDynamicElements, 1000);
+setTimeout(addProtectionToDynamicElements, 3000);
+
+// Also add protection when the page is fully loaded
+window.addEventListener('load', addProtectionToDynamicElements);
 </script>
 
 
